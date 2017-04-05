@@ -1,0 +1,88 @@
+170403 14:37:08	   40 Query	SELECT 'emp' AS `Database`, 'member' AS `Table`, 8 AS `Rows`, 0 AS `Duration`
+		   40 Query	/*!40101 SET @OLD_LOCAL_SQL_MODE=@@SQL_MODE, SQL_MODE='' */
+		   40 Query	SHOW CREATE DATABASE `emp`
+		   40 Query	SHOW CREATE TABLE `emp`.`member`
+		   40 Query	SELECT * FROM `emp`.`member` LIMIT 51200
+		   40 Query	/*!40101 SET SQL_MODE=IFNULL(@OLD_LOCAL_SQL_MODE, '') */
+170403 14:43:02	   40 Query	insert into member values('', 'Coutinho', 90000, 'coutinho@mail.com')
+		   40 Query	select * from member
+170403 14:43:03	   40 Query	select * from member where id='1'
+		   40 Query	delete from member where id=1
+		   40 Query	insert into member values('', 'Sadio Mane', 90000, 'sm@mail.com')
+		   40 Query	select * from member
+		   40 Query	select * from member where id='1'
+		   40 Query	delete from member where id=2
+		   40 Query	insert into member values('', 'Roberto Firmino', 87000, 'rfirmino@mail.com')
+170403 14:43:04	   40 Query	select * from member
+		   40 Query	select * from member where id='1'
+		   40 Query	delete from member where id=3
+		   40 Query	insert into member values('', 'Daniel Sturidge', 80000, 'da.struridge@mail.com')
+		   40 Query	select * from member
+		   40 Query	select * from member where id='1'
+		   40 Query	select id,name from member where id='1'
+		   40 Query	delete from member where id=4
+		   40 Query	insert into member values('', 'Adam Lallana', 80000, 'da.struridge@mail.com')
+		   40 Query	insert into member values('', 'Daniel Bintar', 80000, 'bintar@mail.com')
+		   40 Query	insert into member values('', 'Daniel Fablius', 80000, 'df@mail.com')
+170403 14:43:05	   40 Query	insert into member values('', 'Jordan Henderson', 80000, 'jordan@mail.com')
+		   40 Query	SHOW WARNINGS LIMIT 5
+170403 15:46:32	   40 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
+		   40 Query	SHOW CREATE TABLE `emp`.`member`
+170404  6:39:26	   49 Connect	debian-sys-maint@localhost on 
+		   49 Quit	
+		   50 Connect	debian-sys-maint@localhost on 
+		   50 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		   50 Quit	
+170404  8:37:37	   51 Connect	wicak@10.151.43.194 on 
+		   51 Query	SELECT CONNECTION_ID()
+170404  8:37:38	   51 Query	SET NAMES utf8mb4
+		   51 Query	SHOW STATUS
+		   51 Query	SHOW VARIABLES
+		   51 Query	USE `emp`
+		   51 Query	SHOW COLLATION
+		   51 Query	SHOW ENGINES
+170404  8:37:39	   51 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
+		   51 Query	SHOW CREATE TABLE `emp`.`member`
+170405  6:27:44	   52 Connect	debian-sys-maint@localhost on 
+		   52 Quit	
+		   53 Connect	debian-sys-maint@localhost on 
+		   53 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		   53 Quit	
+170405  6:33:11	   54 Connect	wicak@10.151.43.194 on 
+		   54 Query	SELECT CONNECTION_ID()
+		   54 Query	SET NAMES utf8mb4
+		   54 Query	SHOW STATUS
+		   54 Query	SHOW VARIABLES
+170405  6:33:13	   54 Query	USE `emp`
+		   54 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		   54 Query	SHOW TABLE STATUS FROM `emp`
+		   54 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		   54 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		   54 Query	SHOW TRIGGERS FROM `emp`
+		   54 Query	SHOW EVENTS FROM `emp`
+170405  6:33:14	   54 Query	SHOW CREATE TABLE `emp`.`member`
+		   54 Query	SHOW COLLATION
+		   54 Query	SHOW ENGINES
+170405  6:33:16	   54 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
+		   54 Query	SHOW CREATE TABLE `emp`.`member`
+170405  6:35:55	   54 Query	delete from member where id=12
+170405  6:35:56	   54 Query	insert into member values('', 'Steven Gerrad', 80000, 'da.struridge@mail.com')
+		   54 Query	SHOW WARNINGS LIMIT 5
+170405  6:36:05	   54 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
+		   54 Query	SHOW CREATE TABLE `emp`.`member`
+		   54 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
+170405  6:36:06	   54 Query	SHOW CREATE TABLE `emp`.`member`
+170405  8:47:15	   54 Query	SHOW CREATE TABLE `emp`.`member`
+170405  8:47:16	   54 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
+		   54 Query	SHOW CREATE TABLE `emp`.`member`
+170405  9:08:03	   55 Connect	root@localhost on 
+		   55 Query	select @@version_comment limit 1
+170405  9:08:10	   55 Query	SELECT DATABASE()
+170405  9:08:15	   55 Query	show databases
+170405  9:08:23	   55 Quit	
