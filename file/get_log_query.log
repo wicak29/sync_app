@@ -1,88 +1,122 @@
-170403 14:37:08	   40 Query	SELECT 'emp' AS `Database`, 'member' AS `Table`, 8 AS `Rows`, 0 AS `Duration`
-		   40 Query	/*!40101 SET @OLD_LOCAL_SQL_MODE=@@SQL_MODE, SQL_MODE='' */
-		   40 Query	SHOW CREATE DATABASE `emp`
-		   40 Query	SHOW CREATE TABLE `emp`.`member`
-		   40 Query	SELECT * FROM `emp`.`member` LIMIT 51200
-		   40 Query	/*!40101 SET SQL_MODE=IFNULL(@OLD_LOCAL_SQL_MODE, '') */
-170403 14:43:02	   40 Query	insert into member values('', 'Coutinho', 90000, 'coutinho@mail.com')
-		   40 Query	select * from member
-170403 14:43:03	   40 Query	select * from member where id='1'
-		   40 Query	delete from member where id=1
-		   40 Query	insert into member values('', 'Sadio Mane', 90000, 'sm@mail.com')
-		   40 Query	select * from member
-		   40 Query	select * from member where id='1'
-		   40 Query	delete from member where id=2
-		   40 Query	insert into member values('', 'Roberto Firmino', 87000, 'rfirmino@mail.com')
-170403 14:43:04	   40 Query	select * from member
-		   40 Query	select * from member where id='1'
-		   40 Query	delete from member where id=3
-		   40 Query	insert into member values('', 'Daniel Sturidge', 80000, 'da.struridge@mail.com')
-		   40 Query	select * from member
-		   40 Query	select * from member where id='1'
-		   40 Query	select id,name from member where id='1'
-		   40 Query	delete from member where id=4
-		   40 Query	insert into member values('', 'Adam Lallana', 80000, 'da.struridge@mail.com')
-		   40 Query	insert into member values('', 'Daniel Bintar', 80000, 'bintar@mail.com')
-		   40 Query	insert into member values('', 'Daniel Fablius', 80000, 'df@mail.com')
-170403 14:43:05	   40 Query	insert into member values('', 'Jordan Henderson', 80000, 'jordan@mail.com')
-		   40 Query	SHOW WARNINGS LIMIT 5
-170403 15:46:32	   40 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
-		   40 Query	SHOW CREATE TABLE `emp`.`member`
-170404  6:39:26	   49 Connect	debian-sys-maint@localhost on 
-		   49 Quit	
-		   50 Connect	debian-sys-maint@localhost on 
-		   50 Refresh	
+170408 16:39:24	   89 Query	INSERT INTO `emp`.`daerah` (`kode_daerah`, `nama_daerah`) VALUES ('BDG', 'Bandung')
+		   89 Query	SELECT LAST_INSERT_ID()
+		   89 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah` FROM `emp`.`daerah` WHERE  `id_daerah`=3
+170408 16:41:05	   89 Query	insert into daerah values ('','DPS', 'Denpasar')
+		   89 Query	SHOW WARNINGS LIMIT 5
+170408 16:41:09	   89 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   89 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 16:42:09	   89 Query	insert into daerah values ('','JKT', 'Jakarta')
+170408 16:42:10	   89 Query	insert into daerah values ('','JGJ', 'Jogja')
+		   89 Query	insert into daerah values ('','CGK', 'Cengkareng')
+		   89 Query	delete from daerah where id_daerah = 1
+		   89 Query	SHOW WARNINGS LIMIT 5
+170408 16:42:14	   89 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   89 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 16:42:33	   89 Query	UPDATE `emp`.`daerah` SET `kode_daerah`='YGJ' WHERE  `id_daerah`=6
+170408 16:42:34	   89 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah` FROM `emp`.`daerah` WHERE  `id_daerah`=6
+170408 16:46:39	   89 Query	ALTER TABLE `daerah`
+	ADD COLUMN `date_change` DATETIME NULL DEFAULT NULL AFTER `nama_daerah`
+		   89 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		   89 Query	SHOW TABLE STATUS FROM `emp`
+		   89 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		   89 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		   89 Query	SHOW TRIGGERS FROM `emp`
+		   89 Query	SHOW EVENTS FROM `emp`
+		   89 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 16:46:40	   89 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   89 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   89 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 16:46:43	   89 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-08 16:47:09' WHERE  `id_daerah`=2
+		   89 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=2
+170408 16:46:44	   89 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-08 16:47:10' WHERE  `id_daerah`=3
+		   89 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=3
+170408 16:46:52	   89 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-08 16:47:10' WHERE  `id_daerah`=4
+		   89 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=4
+170408 16:46:53	   89 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-08 16:47:10' WHERE  `id_daerah`=5
+		   89 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=5
+170408 16:46:54	   89 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-08 16:47:10' WHERE  `id_daerah`=6
+		   89 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=6
+170408 16:46:55	   89 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-08 16:47:10' WHERE  `id_daerah`=7
+		   89 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=7
+170408 17:53:15	   90 Connect	wicak@10.151.43.19 on 
+		   90 Query	SELECT CONNECTION_ID()
+		   90 Query	SET NAMES utf8mb4
+		   90 Query	SHOW STATUS
+		   90 Query	SHOW VARIABLES
+		   90 Query	USE `emp`
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   90 Query	SHOW COLLATION
+		   90 Query	SHOW ENGINES
+		   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 17:53:16	   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+170408 17:53:17	   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+170408 17:53:18	   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 17:53:21	   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 17:53:24	   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 17:53:25	   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 18:06:28	   90 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   90 Query	SHOW CREATE TABLE `emp`.`daerah`
+170408 23:23:05	   91 Connect	wicak@10.151.43.19 on 
+		   91 Query	SELECT CONNECTION_ID()
+170408 23:23:06	   91 Query	SET NAMES utf8mb4
+		   91 Query	SHOW STATUS
+		   91 Query	SHOW VARIABLES
+		   91 Query	USE `emp`
+		   91 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		   91 Query	SHOW TABLE STATUS FROM `emp`
+		   91 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		   91 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		   91 Query	SHOW TRIGGERS FROM `emp`
+		   91 Query	SHOW EVENTS FROM `emp`
+		   91 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   91 Query	SHOW COLLATION
+		   91 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   91 Query	SHOW CREATE TABLE `emp`.`daerah`
+170409  6:32:50	   92 Connect	debian-sys-maint@localhost on 
+		   92 Quit	
+		   93 Connect	debian-sys-maint@localhost on 
+		   93 Refresh	
 /usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
 Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
 Time                 Id Command    Argument
-		   50 Quit	
-170404  8:37:37	   51 Connect	wicak@10.151.43.194 on 
-		   51 Query	SELECT CONNECTION_ID()
-170404  8:37:38	   51 Query	SET NAMES utf8mb4
-		   51 Query	SHOW STATUS
-		   51 Query	SHOW VARIABLES
-		   51 Query	USE `emp`
-		   51 Query	SHOW COLLATION
-		   51 Query	SHOW ENGINES
-170404  8:37:39	   51 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
-		   51 Query	SHOW CREATE TABLE `emp`.`member`
-170405  6:27:44	   52 Connect	debian-sys-maint@localhost on 
-		   52 Quit	
-		   53 Connect	debian-sys-maint@localhost on 
-		   53 Refresh	
-/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
-Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
-Time                 Id Command    Argument
-		   53 Quit	
-170405  6:33:11	   54 Connect	wicak@10.151.43.194 on 
-		   54 Query	SELECT CONNECTION_ID()
-		   54 Query	SET NAMES utf8mb4
-		   54 Query	SHOW STATUS
-		   54 Query	SHOW VARIABLES
-170405  6:33:13	   54 Query	USE `emp`
-		   54 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
-		   54 Query	SHOW TABLE STATUS FROM `emp`
-		   54 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
-		   54 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
-		   54 Query	SHOW TRIGGERS FROM `emp`
-		   54 Query	SHOW EVENTS FROM `emp`
-170405  6:33:14	   54 Query	SHOW CREATE TABLE `emp`.`member`
-		   54 Query	SHOW COLLATION
-		   54 Query	SHOW ENGINES
-170405  6:33:16	   54 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
-		   54 Query	SHOW CREATE TABLE `emp`.`member`
-170405  6:35:55	   54 Query	delete from member where id=12
-170405  6:35:56	   54 Query	insert into member values('', 'Steven Gerrad', 80000, 'da.struridge@mail.com')
-		   54 Query	SHOW WARNINGS LIMIT 5
-170405  6:36:05	   54 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
-		   54 Query	SHOW CREATE TABLE `emp`.`member`
-		   54 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
-170405  6:36:06	   54 Query	SHOW CREATE TABLE `emp`.`member`
-170405  8:47:15	   54 Query	SHOW CREATE TABLE `emp`.`member`
-170405  8:47:16	   54 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC, `id` ASC LIMIT 1000
-		   54 Query	SHOW CREATE TABLE `emp`.`member`
-170405  9:08:03	   55 Connect	root@localhost on 
-		   55 Query	select @@version_comment limit 1
-170405  9:08:10	   55 Query	SELECT DATABASE()
-170405  9:08:15	   55 Query	show databases
-170405  9:08:23	   55 Quit	
+		   93 Quit	
+170409  6:53:55	   94 Connect	wicak@10.151.43.19 on 
+		   94 Query	SELECT CONNECTION_ID()
+		   94 Query	SET NAMES utf8mb4
+		   94 Query	SHOW STATUS
+		   94 Query	SHOW VARIABLES
+		   94 Query	USE `emp`
+		   94 Query	SHOW CREATE TABLE `emp`.`daerah`
+		   94 Query	SHOW COLLATION
+		   94 Query	SHOW ENGINES
+170409  6:53:56	   94 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		   94 Query	SHOW CREATE TABLE `emp`.`daerah`
+170409  6:54:40	   94 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-09 16:47:10' WHERE  `id_daerah`=3
+		   94 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=3
+170409  6:54:53	   94 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-08 16:47:10' WHERE  `id_daerah`=3
+		   94 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=3
+170409  6:54:58	   94 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-0  16:47:10' WHERE  `id_daerah`=5
+		   94 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=5
+170409  6:55:08	   94 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-09 16:47:10' WHERE  `id_daerah`=5
+		   94 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=5
+170409  6:55:15	   94 Query	UPDATE `emp`.`daerah` SET `date_change`='2017-04-09 16:47:10' WHERE  `id_daerah`=6
+		   94 Query	SELECT `id_daerah`, `kode_daerah`, `nama_daerah`, `date_change` FROM `emp`.`daerah` WHERE  `id_daerah`=6
+170409  6:55:44	   94 Query	select from daerah where date_change < '2017-04-09 06:56:00'
+170409  6:56:05	   94 Query	select * from daerah where date_change < '2017-04-09 06:56:00'
