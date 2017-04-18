@@ -1,4 +1,3 @@
-
 import paramiko
 import string
 import webbrowser
@@ -134,6 +133,7 @@ if c==2 :
 		init = initiateDBtoHBase()
 		if (init) :
 			print "Data berhasil di export!"
+			print "Inisialisasi data awal.."
 			print "Sedang mentransformasi data ke HBase..."
 			phoenix_cmd = "psql.py -t DAERAH3 file/fetchallmysql.csv"
 
@@ -148,6 +148,7 @@ if c==2 :
 
 	elif (last_sync) :
 		print last_sync > present
+		do_delete = False
 
 		# Mengambil data INSERT dan UPDATE -> bulk ke .csv
 		# Kemudian di jalankan dengan Phoenix
@@ -163,12 +164,15 @@ if c==2 :
 				print(e)
 
 			if (result_phoenix) :
-				print 'Sync telah dilakukan'
+				print 'Sync berhasil dilakukan'
 
 		# Mengambil data DELETE dari remote server, kemudian di simpan di file local
 		ftp = ssh.open_sftp()
 		file = ftp.file('/var/log/mysql/log_query.log', 'r')
-		f_list_query = open('file/list_query.txt', 'w')
+		f_list_query = open('file/list_query_delete.sql', 'w')
+		date_tmp = ''
+
+		print "Cek aksi DELETE pada log..."
 		for line in file :
 			kueri_line = line
 
@@ -180,20 +184,34 @@ if c==2 :
 					date_time_join = tgl + ' ' + wkt
 					date_tmp = convertDateTimeFormat(date_time_join)
 
-					# print 'date tmp: ', date_tmp
-					if (date_tmp > last_sync) :
-						print 'sinkronkan'
-						if 'Query' in line : 
-							for a_q in allow_q :
-								q = re.split(r'\t+', kueri_line)
-								if (a_q in q[2]) or (a_q.upper() in q[2]) :
-									kueri = q[2]
-									# print 'kueri: ', kueri
-									f_list_query.write(kueri)
+			# print 'date_tmp: ', date_tmp
+			# print 'last_sync: ', last_sync
+			# print 'date tmp > last_sync :', date_tmp > last_sync
+			if (date_tmp > last_sync) :
+				print 'sinkronkan'
+				if 'Query' in line : 
+					for a_q in allow_q :
+						q = re.split(r'\t+', kueri_line)
+						if (a_q in q[2]) or (a_q.upper() in q[2]) :
+							kueri = q[2]
+							# print 'kueri: ', kueri
+							f_list_query.write(kueri)
+							do_delete = True
 		f_list_query.close()
 		ftp.close()
 
 		# Menjalankan DELETE
+		if (do_delete):
+			print "Sinkronisasi, DELETE file on progress sync to HBase..."
+			phoenix_delete_cmd = "psql.py -t DAERAH3 file/list_query_delete.sql"
+
+			try : 
+				res_phoenix_del = subprocess.check_output([phoenix_cmd], shell=True)
+			except Exception as e:
+				print(e)
+
+			if (res_phoenix_del) :
+				print 'Sync berhasil dilakukan'
 
 		insert_time = insertNewSync()
 		if (insert_time) :

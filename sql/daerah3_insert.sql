@@ -1,0 +1,1 @@
+UPSERT INTO daerah3 VALUES (11, 'PDG', 'Padang', '2017-04-15 17:32:14');
