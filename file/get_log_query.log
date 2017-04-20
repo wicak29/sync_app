@@ -65,3 +65,387 @@
 170415 13:32:04	  145 Query	INSERT INTO daerah VALUES (10, 'MRK', 'MERAUKE', '2017-04-15 13:32:14')
 170415 13:32:13	  145 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
 		  145 Query	SHOW CREATE TABLE `emp`.`daerah`
+170415 14:00:39	  145 Query	INSERT INTO daerah VALUES (11, 'MED', 'MEDAN', '2017-04-15 14:00:14')
+170415 14:00:42	  145 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah`
+170415 15:05:54	  145 Query	TRUNCATE `daerah`
+170415 15:05:55	  145 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  145 Query	SHOW TABLE STATUS FROM `emp`
+		  145 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  145 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  145 Query	SHOW TRIGGERS FROM `emp`
+		  145 Query	SHOW EVENTS FROM `emp`
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah`
+		  145 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah`
+170415 15:06:47	  145 Query	INSERT INTO `daerah` (`iddaerah`, `kode`, `nama`, `date_change`) VALUES
+	(1, 'SBY', 'Surabaya', '2017-04-08 16:47:11'),
+	(2, 'JKT', 'Jakarta', '2017-04-08 16:47:09'),
+	(3, 'BDG', 'Bandung', '2017-04-08 16:47:10'),
+	(4, 'DPS', 'Denpasar', '2017-04-08 16:47:10'),
+	(5, 'JKT', 'Jakarta', '2017-04-09 16:47:10'),
+	(6, 'YGJ', 'Jogja', '2017-04-09 16:47:10'),
+	(7, 'CGK', 'Cengkareng', '2017-04-09 14:57:30'),
+	(8, 'BUD', 'Ubud', '2017-04-09 14:57:30'),
+	(9, 'SGJ', 'Singaraja', '2017-04-09 14:57:30')
+170415 15:06:51	  145 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah`
+170415 15:06:55	  148 Connect	wicak@10.151.36.29 on emp
+		  148 Query	set autocommit=0
+		  148 Query	SELECT * FROM daerah
+		  148 Quit	
+170415 15:08:32	  145 Statistics	
+170415 15:08:33	  145 Statistics	
+170415 15:13:51	  145 Query	SELECT * FROM `emp`.`daerah` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah`
+170415 15:16:01	  145 Query	RENAME TABLE `daerah` TO `daerah3`
+		  145 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  145 Query	SHOW TABLE STATUS FROM `emp`
+		  145 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  145 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  145 Query	SHOW TRIGGERS FROM `emp`
+		  145 Query	SHOW EVENTS FROM `emp`
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:16:02	  145 Query	SHOW ENGINES
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:16:07	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:16:08	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:16:12	  145 Query	TRUNCATE `daerah3`
+		  145 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  145 Query	SHOW TABLE STATUS FROM `emp`
+		  145 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  145 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  145 Query	SHOW TRIGGERS FROM `emp`
+		  145 Query	SHOW EVENTS FROM `emp`
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:16:13	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:18:07	  149 Connect	wicak@10.151.36.29 on emp
+		  149 Query	set autocommit=0
+		  149 Query	SELECT * FROM daerah3
+		  149 Quit	
+170415 15:18:15	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:21:41	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:21:44	  145 Query	INSERT INTO `daerah3` (`iddaerah`, `kode`, `nama`, `date_change`) VALUES
+	(1, 'SBY', 'Surabaya', '2017-04-08 16:47:11'),
+	(2, 'JKT', 'Jakarta', '2017-04-08 16:47:09'),
+	(3, 'BDG', 'Bandung', '2017-04-08 16:47:10'),
+	(4, 'DPS', 'Denpasar', '2017-04-08 16:47:10'),
+	(5, 'JKT', 'Jakarta', '2017-04-09 16:47:10'),
+	(6, 'YGJ', 'Jogja', '2017-04-09 16:47:10'),
+	(7, 'CGK', 'Cengkareng', '2017-04-09 14:57:30'),
+	(8, 'BUD', 'Ubud', '2017-04-09 14:57:30'),
+	(9, 'SGJ', 'Singaraja', '2017-04-09 14:57:30')
+170415 15:21:47	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:22:04	  150 Connect	wicak@10.151.36.29 on emp
+		  150 Query	set autocommit=0
+		  150 Query	SELECT * FROM daerah3
+		  150 Quit	
+170415 15:23:24	  145 Query	INSERT INTO daerah3 VALUES (10, 'MED', 'MEDAN', '2017-04-15 15:24:14')
+		  145 Query	INSERT INTO daerah3 VALUES (11, 'PAD', 'Padang', '2017-04-15 15:24:15')
+170415 15:23:27	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:42:49	  145 Query	DELETE FROM daerah3 WHERE iddaerah = 1
+170415 15:42:53	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:46:25	  145 Query	DELETE FROM daerah3 WHERE iddaerah = 3
+170415 15:46:27	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:48:38	  145 Query	UPDATE daerah3 SET kode='PDG' 
+WHERE iddaerah=11
+170415 15:48:41	  145 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  145 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170415 15:49:52	  145 Query	UPDATE daerah3 SET kode='PDG' WHERE iddaerah=11
+170415 20:45:49	  145 Quit	
+170416  6:30:45	  151 Connect	debian-sys-maint@localhost on 
+		  151 Quit	
+		  152 Connect	debian-sys-maint@localhost on 
+		  152 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		  152 Quit	
+170417  6:42:37	  153 Connect	debian-sys-maint@localhost on 
+		  153 Quit	
+		  154 Connect	debian-sys-maint@localhost on 
+		  154 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		  154 Quit	
+170417  7:23:07	  155 Connect	wicak@10.151.43.210 on 
+		  155 Query	SELECT CONNECTION_ID()
+		  155 Query	SET NAMES utf8mb4
+		  155 Query	SHOW STATUS
+		  155 Query	SHOW VARIABLES
+		  155 Query	USE `emp`
+		  155 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  155 Query	SHOW TABLE STATUS FROM `emp`
+		  155 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  155 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  155 Query	SHOW TRIGGERS FROM `emp`
+		  155 Query	SHOW EVENTS FROM `emp`
+170417  7:23:14	  155 Query	SHOW ENGINES
+		  155 Query	SHOW COLLATION
+		  155 Query	SHOW VARIABLES LIKE 'collation_database'
+170417  7:25:04	  155 Query	CREATE TABLE `airport` (
+	`code` VARCHAR(5) NULL,
+	`desc` VARCHAR(100) NULL
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+		  155 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  155 Query	SHOW TABLE STATUS FROM `emp`
+		  155 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  155 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+170417  7:25:05	  155 Query	SHOW TRIGGERS FROM `emp`
+		  155 Query	SHOW EVENTS FROM `emp`
+		  155 Query	SHOW CREATE TABLE `emp`.`airport`
+		  155 Query	SHOW CREATE TABLE `emp`.`airport`
+170417  7:25:09	  155 Query	SELECT * FROM `emp`.`airport` LIMIT 1000
+		  155 Query	SHOW CREATE TABLE `emp`.`airport`
+170417  7:48:50	  155 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170417  7:48:51	  155 Query	SHOW CREATE TABLE `emp`.`member`
+170417  7:48:54	  155 Query	SHOW VARIABLES LIKE 'collation_database'
+170417  7:54:40	  155 Query	CREATE TABLE `routes` (
+	`airline` VARCHAR(3) NULL,
+	`id_airline` VARCHAR(10) NULL,
+	`src_airport` VARCHAR(4) NULL,
+	`id_src_airport` VARCHAR(10) NULL,
+	`dst_airport` VARCHAR(4) NULL,
+	`id_dst_airport` VARCHAR(10) NULL,
+	`codeshare` VARCHAR(2) NULL,
+	`stop` INT NULL,
+	`equipment` VARCHAR(50) NULL
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+		  155 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  155 Query	SHOW TABLE STATUS FROM `emp`
+		  155 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  155 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  155 Query	SHOW TRIGGERS FROM `emp`
+		  155 Query	SHOW EVENTS FROM `emp`
+		  155 Query	SHOW CREATE TABLE `emp`.`routes`
+		  155 Query	SHOW CREATE TABLE `emp`.`routes`
+170417  7:54:45	  155 Query	SELECT * FROM `emp`.`routes` LIMIT 1000
+		  155 Query	SHOW CREATE TABLE `emp`.`routes`
+170417  8:23:17	  155 Query	SHOW CREATE TABLE `emp`.`member`
+170417 10:30:29	  155 Quit	
+170417 11:26:29	  156 Connect	wicak@10.151.43.210 on 
+		  156 Query	SELECT CONNECTION_ID()
+		  156 Query	SET NAMES utf8mb4
+		  156 Query	SHOW STATUS
+		  156 Query	SHOW VARIABLES
+		  156 Query	USE `emp`
+		  156 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  156 Query	SHOW TABLE STATUS FROM `emp`
+		  156 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  156 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  156 Query	SHOW TRIGGERS FROM `emp`
+		  156 Query	SHOW EVENTS FROM `emp`
+170417 11:26:39	  156 Query	SHOW CREATE TABLE `emp`.`routes`
+		  156 Query	SHOW COLLATION
+		  156 Query	SHOW ENGINES
+170417 11:26:42	  156 Query	SELECT * FROM `emp`.`routes` LIMIT 1000
+		  156 Query	SHOW CREATE TABLE `emp`.`routes`
+170418  6:38:07	  157 Connect	debian-sys-maint@localhost on 
+		  157 Quit	
+		  158 Connect	debian-sys-maint@localhost on 
+		  158 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		  158 Quit	
+170418 12:19:36	  159 Connect	wicak@10.151.43.26 on 
+		  159 Query	SELECT CONNECTION_ID()
+170418 12:19:37	  159 Query	SET NAMES utf8mb4
+		  159 Query	SHOW STATUS
+		  159 Query	SHOW VARIABLES
+		  159 Query	USE `emp`
+		  159 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  159 Query	SHOW TABLE STATUS FROM `emp`
+		  159 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  159 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  159 Query	SHOW TRIGGERS FROM `emp`
+		  159 Query	SHOW EVENTS FROM `emp`
+170418 12:24:10	  159 Query	SHOW CREATE TABLE `emp`.`airport`
+		  159 Query	SHOW COLLATION
+		  159 Query	SHOW ENGINES
+170418 12:24:12	  159 Query	SELECT * FROM `emp`.`airport` LIMIT 1000
+		  159 Query	SHOW CREATE TABLE `emp`.`airport`
+170418 12:24:14	  159 Query	SHOW CREATE TABLE `emp`.`routes`
+		  159 Query	SELECT * FROM `emp`.`routes` LIMIT 1000
+		  159 Query	SHOW CREATE TABLE `emp`.`routes`
+170418 14:40:54	  159 Quit	
+170418 17:10:35	  160 Connect	wicak@10.151.36.29 on emp
+		  160 Query	set autocommit=0
+		  160 Query	SELECT * FROM daerah WHERE date_change > '2017-04-15 15:50:37'
+		  160 Quit	
+170418 22:52:47	  161 Connect	wicak@10.151.43.26 on 
+		  161 Query	SELECT CONNECTION_ID()
+		  161 Query	SET NAMES utf8mb4
+		  161 Query	SHOW STATUS
+		  161 Query	SHOW VARIABLES
+		  161 Query	USE `emp`
+		  161 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  161 Query	SHOW TABLE STATUS FROM `emp`
+		  161 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  161 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  161 Query	SHOW TRIGGERS FROM `emp`
+		  161 Query	SHOW EVENTS FROM `emp`
+170418 22:53:31	  161 Query	SHOW CREATE TABLE `emp`.`routes`
+		  161 Query	SHOW COLLATION
+		  161 Query	SHOW ENGINES
+170418 22:53:32	  161 Query	SELECT * FROM `emp`.`routes` LIMIT 1000
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170418 22:54:09	  161 Query	ALTER TABLE `routes`
+	ADD COLUMN `id_route` INT NULL DEFAULT NULL FIRST
+170418 22:54:10	  161 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  161 Query	SHOW TABLE STATUS FROM `emp`
+		  161 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  161 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  161 Query	SHOW TRIGGERS FROM `emp`
+		  161 Query	SHOW EVENTS FROM `emp`
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170418 22:54:22	  161 Query	ALTER TABLE `routes`
+	CHANGE COLUMN `id_route` `id_route` INT(11) NULL DEFAULT NULL FIRST
+		  161 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  161 Query	SHOW TABLE STATUS FROM `emp`
+		  161 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  161 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  161 Query	SHOW TRIGGERS FROM `emp`
+		  161 Query	SHOW EVENTS FROM `emp`
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170418 22:54:46	  161 Query	SELECT * FROM `emp`.`routes` LIMIT 1000
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170418 22:55:19	  161 Query	SHOW CREATE DATABASE `emp`
+		  161 Query	SHOW CHARSET
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170418 22:56:16	  161 Query	SHOW CREATE DATABASE `emp`
+170418 22:57:25	  161 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_new.csv' REPLACE INTO TABLE `emp`.`routes` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop`, `equipment`)
+170418 22:57:27	  161 Query	SHOW WARNINGS
+170418 22:58:12	  161 Query	TRUNCATE TABLE `emp`.`routes`
+		  161 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_new.csv' REPLACE INTO TABLE `emp`.`routes` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop`, `equipment`)
+170418 22:58:13	  161 Query	SHOW WARNINGS
+170418 22:58:17	  161 Query	TRUNCATE TABLE `emp`.`routes`
+		  161 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_new.csv' REPLACE INTO TABLE `emp`.`routes` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop`, `equipment`)
+170418 22:58:19	  161 Query	SHOW WARNINGS
+170418 23:07:55	  161 Query	SHOW CREATE DATABASE `emp`
+170418 23:07:57	  161 Query	TRUNCATE TABLE `emp`.`routes`
+		  161 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi.csv' REPLACE INTO TABLE `emp`.`routes` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop`, `equipment`)
+170418 23:07:59	  161 Query	SHOW WARNINGS
+170418 23:08:08	  161 Query	SELECT * FROM `emp`.`routes` LIMIT 1000
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+		  161 Query	SHOW TABLE STATUS LIKE 'routes'
+170418 23:08:29	  161 Query	SELECT * WHERE routes.codeshare = 'Y'
+170418 23:08:41	  161 Query	SELECT * FROM routes WHERE routes.codeshare = 'Y'
+170418 23:31:17	  161 Query	SELECT * FROM routes WHERE id_route = 65000
+170419  3:41:04	  161 Query	ALTER TABLE `routes`
+	ADD COLUMN `date_change` DATETIME NULL DEFAULT NULL AFTER `equipment`
+170419  3:41:06	  161 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+170419  3:41:07	  161 Query	SHOW TABLE STATUS FROM `emp`
+		  161 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  161 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  161 Query	SHOW TRIGGERS FROM `emp`
+		  161 Query	SHOW EVENTS FROM `emp`
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170419  3:41:09	  161 Query	SELECT * FROM `emp`.`routes` LIMIT 1000
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+		  161 Query	SHOW TABLE STATUS LIKE 'routes'
+170419  3:42:39	  161 Query	update routes 
+set date_change='2017-04-18 10:00:00'
+where id_route > 0
+170419  3:42:47	  161 Query	SELECT * FROM `emp`.`routes` LIMIT 1000
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+		  161 Query	SHOW TABLE STATUS LIKE 'routes'
+170419  3:43:02	  161 Query	select * from routes where id_routes = 1
+170419  3:43:14	  161 Query	select * from routes where id_route = 1
+170419  3:43:53	  161 Query	INSERT INTO `emp`.`routes` (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `stop`, `equipment`, `date_change`) VALUES (1, '2B', '410', 'AER', '2965', 'KZN', '2990', 0, 'CR2', '2017-04-19 03:43:51')
+		  161 Query	SELECT `id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop`, `equipment`, `date_change` FROM `emp`.`routes` WHERE  `id_route`=1 AND `airline`='2B' AND `id_airline`='410' AND `src_airport`='AER' AND `id_src_airport`='2965' AND `dst_airport`='KZN' AND `id_dst_airport`='2990' AND `codeshare` IS NULL AND `stop`=0 AND `equipment`='CR2' AND `date_change`='2017-04-19 03:43:51' LIMIT 1
+		  161 Query	SHOW TABLE STATUS LIKE 'routes'
+170419  3:43:54	  161 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  161 Query	SHOW CREATE TABLE `emp`.`routes`
+		  161 Query	SHOW TABLE STATUS LIKE 'routes'
+170419  3:45:35	  161 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000, 99000
+170419  6:40:40	  162 Connect	debian-sys-maint@localhost on 
+		  162 Quit	
+		  163 Connect	debian-sys-maint@localhost on 
+		  163 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		  163 Quit	
+170419  7:25:03	  161 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 100000
+170419  7:25:06	  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170419  7:26:14	  164 Connect	wicak@10.151.43.26 on 
+		  164 Query	SELECT CONNECTION_ID()
+		  164 Query	SET NAMES utf8mb4
+		  164 Query	SHOW STATUS
+		  164 Query	SHOW VARIABLES
+		  164 Query	USE `emp`
+		  164 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  164 Query	SHOW TABLE STATUS FROM `emp`
+		  164 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  164 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  164 Query	SHOW TRIGGERS FROM `emp`
+		  164 Query	SHOW EVENTS FROM `emp`
+170419  7:26:18	  164 Quit	
+170419 11:56:05	  161 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 100000
+170419 11:56:06	  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170419 11:56:09	  161 Statistics	
+170419 12:10:55	  161 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 100000
+170419 12:10:57	  161 Query	SHOW CREATE TABLE `emp`.`routes`
+170419 13:50:31	  161 Quit	
+170419 14:09:32	  165 Connect	wicak@10.151.43.26 on 
+170419 14:09:33	  165 Query	SELECT CONNECTION_ID()
+170419 14:09:36	  165 Query	SET NAMES utf8mb4
+		  165 Query	SHOW STATUS
+170419 14:10:17	  165 Query	SHOW VARIABLES
+		  165 Query	USE `emp`
+		  165 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+170419 14:10:18	  165 Query	SHOW TABLE STATUS FROM `emp`
+170419 14:10:22	  165 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+170419 14:10:24	  165 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  165 Query	SHOW TRIGGERS FROM `emp`
+		  165 Query	SHOW EVENTS FROM `emp`
+170419 14:10:45	  165 Query	SHOW CREATE TABLE `emp`.`routes`
+		  165 Query	SHOW COLLATION
+		  165 Query	SHOW ENGINES
+170419 14:10:46	  165 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  165 Query	SHOW CREATE TABLE `emp`.`routes`
+170419 14:10:47	  165 Query	SHOW TABLE STATUS LIKE 'routes'
+170420  6:43:03	  166 Connect	debian-sys-maint@localhost on 
+		  166 Quit	
+		  167 Connect	debian-sys-maint@localhost on 
+		  167 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		  167 Quit	
+170420  8:43:34	  168 Connect	wicak@10.151.43.86 on 
+		  168 Query	SELECT CONNECTION_ID()
+		  168 Query	SET NAMES utf8mb4
+		  168 Query	SHOW STATUS
+		  168 Query	SHOW VARIABLES
+		  168 Query	USE `emp`
+		  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+170420  8:44:02	  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SHOW COLLATION
+		  168 Query	SHOW ENGINES
+170420  8:44:03	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SHOW TABLE STATUS LIKE 'routes'

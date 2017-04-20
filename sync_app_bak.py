@@ -203,7 +203,7 @@ if c==2 :
 		# Menjalankan DELETE
 		if (do_delete):
 			print "Sinkronisasi, DELETE file on progress sync to HBase..."
-			phoenix_delete_cmd = "psql.py -t DAERAH3 file/list_query_delete.sql"
+			phoenix_delete_cmd = "psql.py -t ROUTES file/list_query_delete.sql"
 
 			try : 
 				res_phoenix_del = subprocess.check_output([phoenix_cmd], shell=True)
