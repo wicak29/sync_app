@@ -13,9 +13,15 @@ import csv
 import sys
 import subprocess
 import conv_phoenix
+from ConfigParser import SafeConfigParser
 
-def getLastSync():
-	db = MySQLdb.connect(host='localhost', user='root', passwd='root', db='sinkronisasi')
+def getLastSync(data):
+	host = data['host']
+	username = data['username']
+	password = data['password']
+	db_name = data['db_name']
+
+	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
 	cursor = db.cursor()
 
 	sql = "SELECT * FROM waktu_sinkronisasi ORDER BY waktu DESC LIMIT 1"
@@ -29,9 +35,13 @@ def getLastSync():
 		return 0		
 	db.close()
 
-def initiateDBtoHBase():
-	# dump MySQL ke csv
-	db = MySQLdb.connect(host='10.151.36.129', user='wicak', passwd='m3l0dy!', db='emp')
+def initiateDBtoHBase(data):
+	host = data['host']
+	username = data['username']
+	password = data['password']
+	db_name = data['db_name']
+	# dump dari MySQL ke csv
+	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
 	cursor = db.cursor()
 	sql = "SELECT * FROM routes2"
 	try :
@@ -42,12 +52,17 @@ def initiateDBtoHBase():
 			c.writerow(row)
 		return 1
 	except :
-		print "Error, unable to fetch data from MySQL (10.151.36.129)"
+		print "Error, unable to fetch data from MySQL (",host,")"
 		return 0
 	db.close()
 
 def getDataAfterLastSync(last_sync):
-	db = MySQLdb.connect(host='10.151.36.129', user='wicak', passwd='m3l0dy!', db='emp')
+	data = getConfMysqlDb()
+	host = data['host']
+	username = data['username']
+	password = data['password']
+	db_name = data['db_name']
+	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
 	cursor = db.cursor()
 	sql = "SELECT * FROM routes2 WHERE date_change > '{0}'".format(last_sync)
 
@@ -59,16 +74,23 @@ def getDataAfterLastSync(last_sync):
 			c.writerow(row)
 		return 1
 	except :
-		print "Error, unable to fetch data from MySQL (10.151.36.129)"
+		print "Error, unable to fetch data from MySQL (",host,")"
 		return 0
 	db.close()
 
 
-def insertNewSync():
+def insertNewSync(data):
+	host = data['host']
+	username = data['username']
+	password = data['password']
+	db_name = data['db_name']
+	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
+	cursor = db.cursor()
+
 	ts = time.time()
 	timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 	print 'time stamp: ', timestamp
-	db = MySQLdb.connect(host='localhost', user='root', passwd='root', db='sinkronisasi')	
+	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)	
 	cursor = db.cursor()
 
 	sql = "INSERT INTO waktu_sinkronisasi (waktu) VALUES ('{0}')".format(timestamp)
@@ -89,7 +111,6 @@ def insertNewSync():
 	finally :
 		db.close
 
-
 def isDateFormat(input):
     try:
         time.strptime(input, '%y%m%d')
@@ -108,6 +129,52 @@ def convertDateTimeFormat(input):
 	result = datetime.strptime(input, '%y%m%d %H:%M:%S')
 	return result
 
+def getConfMysqlDb():
+	parser = SafeConfigParser()
+	parser.read('configuration.ini')
+
+	conf_list = {
+		'host' : parser.get('mysql_db', 'host'),
+		'username' : parser.get('mysql_db', 'username'),
+		'password' : parser.get('mysql_db', 'password'),
+		'db_name' : parser.get('mysql_db', 'db_name')
+	}
+	return conf_list
+
+def getConfSyncLogDb():
+	parser = SafeConfigParser()
+	parser.read('configuration.ini')
+
+	conf_list = {
+		'host' : parser.get('sync_log_db', 'host'),
+		'username' : parser.get('sync_log_db', 'username'),
+		'password' : parser.get('sync_log_db', 'password'),
+		'db_name' : parser.get('sync_log_db', 'db_name')
+	}
+	return conf_list
+
+def getSshAccess():
+	parser = SafeConfigParser()
+	parser.read('configuration.ini')
+
+	conf_list = {
+		'host' : parser.get('ssh_access', 'host'),
+		'username' : parser.get('ssh_access', 'username'),
+		'password' : parser.get('ssh_access', 'password')
+	}
+	return conf_list
+
+def remoteServerMysqlDb():
+	data = getSshAccess()
+	host = data['host']
+	username = data['username']
+	password = data['password']
+
+	ssh = paramiko.SSHClient()
+	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())	
+	ssh.connect(host, username=username, password=password)
+	return ssh
+
 def mainGetFile() :
 	ftp = ssh.open_sftp()
 	ftp.get('/var/log/mysql/log_query.log', 'file/get_log_query.log')
@@ -115,145 +182,171 @@ def mainGetFile() :
 	# webbrowser.open_new(os.getcwd()+'/get_log_query.log')
 	print ("FILE GOT!")
 
-ssh = paramiko.SSHClient()
-ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())	
-ssh.connect('10.151.36.129', username='administrator', password='m3l0dy!')
+def initiateTransformMysqlToHbase(mysql_db, sync_db):
+	print "Belum pernah sinkronisasi"
+	init = initiateDBtoHBase(mysql_db)
+	if (init) :
+		print "Data berhasil di export!"
+		print "Inisialisasi data awal.."
+		print "Mmentransformasi data ke HBase..."
+		create_tabel = "psql.py file/routes_create_2.sql" 
+		phoenix_cmd = "psql.py -t ROUTES2 file/fetchallmysql.csv"
 
+		try :
+			result_create_tabel = subprocess.check_output([create_tabel], shell=True)
+			if (result_create_tabel):
+				print "Tabel berhasil dibuat di HBase"
+				try : 
+					result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
+					if (result_phoenix):
+						insert_time = insertNewSync(sync_db)
+						if (insert_time) :
+							print 'Inisialisasi berhasil dilakukan, last insert id: ', insert_time
+				except Exception as e:
+					print(e)			
+		except Exception as e:
+			print(e)
 
 allow_q = ["insert", "delete", "update"]
 
-print "1: get file log"
-print "2: print contents of file"
-c = input('Masukan pilihan :')
+if __name__ == '__main__':
+	data_mysql = getConfMysqlDb()
+	data_sync_db = getConfSyncLogDb()
+	data_ssh = getSshAccess()
 
-if c==1 :
-	mainGetFile()
-if c==2 :
-	last_sync = getLastSync()
-	present = datetime.now()
-	print 'sinkron terakhir: ',last_sync
-	print 'waktu sekarang: ', present
+	ssh = paramiko.SSHClient()
+	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())	
+	ssh.connect(data_ssh['host'], username=data_ssh['username'], password=data_ssh['password'])
+	
+	print "1: get file log"
+	print "2: print contents of file"
+	c = input('Masukan pilihan :')
 
-	if (not last_sync) :
-		print "Belum pernah sinkronisasi"
-		init = initiateDBtoHBase()
-		if (init) :
-			print "Data berhasil di export!"
-			print "Inisialisasi data awal.."
-			print "Sedang mentransformasi data ke HBase..."
-			create_tabel = "psql.py file/routes_create_2.sql" 
-			phoenix_cmd = "psql.py -t ROUTES2 file/fetchallmysql.csv"
+	if c==1 :
+		mainGetFile()
+	if c==2 :
+		last_sync = getLastSync(data_sync_db)
+		present = datetime.now()
+		print 'sinkron terakhir: ',last_sync
+		print 'waktu sekarang: ', present
 
+		if (not last_sync) :
+			initiateTransformMysqlToHbase(data_mysql, data_sync_db)
+			# print "Belum pernah sinkronisasi"
+			# init = initiateDBtoHBase(data_mysql)
+			# if (init) :
+			# 	print "Data berhasil di export!"
+			# 	print "Inisialisasi data awal.."
+			# 	print "Mmentransformasi data ke HBase..."
+			# 	create_tabel = "psql.py file/routes_create_2.sql" 
+			# 	phoenix_cmd = "psql.py -t ROUTES2 file/fetchallmysql.csv"
 
-			result_create_tabel = subprocess.check_output([create_tabel], shell=True)
-			if (result_create_tabel):
-				result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
-				if (result_phoenix):
-					insert_time = insertNewSync()
-					if (insert_time) :
-						print 'Inisialisasi berhasil dilakukan, last insert id: ', insert_time
+			# 	try :
+			# 		result_create_tabel = subprocess.check_output([create_tabel], shell=True)
+			# 		if (result_create_tabel):
+			# 			try : 
+			# 				result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
+			# 				if (result_phoenix):
+			# 					insert_time = insertNewSync(data_sync_db)
+			# 					if (insert_time) :
+			# 						print 'Inisialisasi berhasil dilakukan, last insert id: ', insert_time
+			# 			except Exception as e:
+			# 				print(e)			
+			# 	except Exception as e:
+			# 		print(e)
 
-			# try :
-			# 	result_create_tabel = subprocess.check_output([create_tabel], shell=True)
-			# 	if (result_create_tabel):
-			# 		try : 
-			# 			result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
-			# 			if (result_phoenix):
-			# 				insert_time = insertNewSync()
-			# 				if (insert_time) :
-			# 					print 'Inisialisasi berhasil dilakukan, last insert id: ', insert_time
-			# 		except Exception as e:
-			# 			print(e)			
-			# except Exception as e:
-			# 	print(e)
-
-	elif (last_sync) :
-		print "Sinkronisasi terakhir: ", last_sync
-		print last_sync > present
-		do_patching = False
-
-		'''
-		# Mengambil data INSERT dan UPDATE -> bulk ke .csv
-		# Kemudian di jalankan dengan Phoenix
-		data_in_up = getDataAfterLastSync(last_sync)
-		if (data_in_up):
+		elif (last_sync) :
 			print "Sinkronisasi terakhir: ", last_sync
-			print "Data insert dan update didapat"
-			print "Mentransform ke HBase..."
-			phoenix_cmd = "psql.py -t ROUTES file/fetchnewtosync.csv"
+			print last_sync > present
+			do_patching = False
 
-			try : 
-				result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
-			except Exception as e:
-				print(e)
+			'''
+			# Mengambil data INSERT dan UPDATE -> bulk ke .csv
+			# Kemudian di jalankan dengan Phoenix
+			data_in_up = getDataAfterLastSync(last_sync)
+			if (data_in_up):
+				print "Sinkronisasi terakhir: ", last_sync
+				print "Data insert dan update didapat"
+				print "Mentransform ke HBase..."
+				phoenix_cmd = "psql.py -t ROUTES file/fetchnewtosync.csv"
 
-			if (result_phoenix) :
-				print 'Sync berhasil dilakukan'
-		'''
+				try : 
+					result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
+				except Exception as e:
+					print(e)
 
-		# Mengambil data DELETE dari remote server, kemudian di simpan di file local
-		print "Mengambil data Query dari log ..."
-		ftp = ssh.open_sftp()
-		file = ftp.file('/var/log/mysql/log_query.log', 'r')
-		f_list_query = open('file/list_all_query.sql', 'w')
-		date_tmp = ''
+				if (result_phoenix) :
+					print 'Sync berhasil dilakukan'
+			'''
 
-		print "Cek aksi INSERT, UPDATE, DELETE pada log..."
-		for line in file :
-			kueri_line = line
+			# Mengambil data DELETE dari remote server, kemudian di simpan di file local
+			print "Mengambil data Query dari log ..."
+			ftp = ssh.open_sftp()
+			file = ftp.file('/var/log/mysql/log_query.log', 'r')
+			f_list_query = open('file/list_all_query.sql', 'w')
+			date_tmp = ''
 
-			get_waktu = kueri_line.split()
-			
-			tgl = str(get_waktu[0])
-			if (len(get_waktu)>1):
-				wkt = str(get_waktu[1])
-			if (isDateFormat(tgl)) :
-				if (isTimeFormat(wkt)) :
-					date_time_join = tgl + ' ' + wkt
-					date_tmp = convertDateTimeFormat(date_time_join)
+			print "Cek aksi INSERT, UPDATE, DELETE pada log..."
+			for line in file :
+				kueri_line = line
 
-			if (date_tmp > last_sync) :
-				if 'Query' in line : 
-					for a_q in allow_q :
-						q = re.split(r'\t+', kueri_line)
-						if (a_q in q[2]) or (a_q.upper() in q[2]) :
-							kueri = q[2].replace("\n", "")
-							split_kueri = kueri.split()
+				get_waktu = kueri_line.split()
+				
+				tgl = str(get_waktu[0])
+				if (len(get_waktu)>1):
+					wkt = str(get_waktu[1])
+				if (isDateFormat(tgl)) :
+					if (isTimeFormat(wkt)) :
+						date_time_join = tgl + ' ' + wkt
+						date_tmp = convertDateTimeFormat(date_time_join)
 
-							# Cek jika sintaks adalah UPDATE
-							if (split_kueri[0].upper()=="INSERT"):
-								print "[sync] INSERT"
-								new_kueri = kueri.replace("INSERT", "UPSERT").replace("insert", "UPSERT") + ";\n";
-							if (split_kueri[0].upper()=="UPDATE"):
-								print "[sync] UPDATE"
-								new_kueri = conv_phoenix.update_to_upsert(kueri)
-							if (split_kueri[0].upper()=="DELETE") :
-								print "[sync] DELETE"
-								new_kueri = kueri.replace("INSERT", "UPSERT").replace("insert", "UPSERT") + ";\n";
-								
-							f_list_query.write(new_kueri)
-							do_patching = True
-		f_list_query.close()
-		ftp.close()
+				if (date_tmp > last_sync) :
+					if 'Query' in line : 
+						for a_q in allow_q :
+							q = re.split(r'\t+', kueri_line)
+							if (a_q in q[2]) or (a_q.upper() in q[2]) :
+								kueri = q[2].replace("\n", "")
+								split_kueri = kueri.split()
 
-		# Menjalankan DELETE, INSERT, dan UPDATE
-		if (do_patching):
-			print "Sinkronisasi, DELETE, INSERT dan UPDATE file on progress sync to HBase..."
-			phoenix_cmd = "psql.py -t ROUTES2 file/list_all_query.sql"
-			res_phoenix =''
+								# Cek jika sintaks adalah UPDATE
+								if (split_kueri[0].upper()=="INSERT"):
+									print "[sync] INSERT"
+									new_kueri = kueri.replace("INSERT", "UPSERT").replace("insert", "UPSERT") + ";\n";
+								if (split_kueri[0].upper()=="UPDATE"):
+									print "[sync] UPDATE"
+									new_kueri = conv_phoenix.update_to_upsert(kueri)
+								if (split_kueri[0].upper()=="DELETE") :
+									print "[sync] DELETE"
+									new_kueri = kueri.replace("INSERT", "UPSERT").replace("insert", "UPSERT") + ";\n";
+									
+								f_list_query.write(new_kueri)
+								do_patching = True
+			f_list_query.close()
+			ftp.close()
 
-			try : 
-				res_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
-			except Exception as e:
-				print(e)
+			# Menjalankan DELETE, INSERT, dan UPDATE
+			if (do_patching):
+				print "Sinkronisasi, DELETE, INSERT dan UPDATE file on progress sync to HBase..."
+				phoenix_cmd = "psql.py -t ROUTES2 file/list_all_query.sql"
+				res_phoenix =''
 
-			if (res_phoenix) :
-				insert_time = insertNewSync()
-				if (insert_time) :
-					print 'Sync telah dilakukan, last insert id: ', insert_time
-				print 'Sync berhasil dilakukan'
+				try : 
+					res_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
+				except Exception as e:
+					print(e)
 
-	print "Selesai"	
-else :
-	print "EXIT!";
-ssh.close()
+				if (res_phoenix) :
+					insert_time = insertNewSync(data_sync_db)
+					if (insert_time) :
+						print 'Sync telah dilakukan, last insert id: ', insert_time
+					print 'Sync berhasil dilakukan'
+
+		print "Selesai"
+	if c==3 :
+		print "Key terlarang!"
+		getconf = getConfMysqlDb()
+		print getconf	
+		print getconf['host']
+	else :
+		print "EXIT!";
+	ssh.close()

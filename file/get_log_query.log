@@ -449,3 +449,496 @@ Time                 Id Command    Argument
 170420  8:44:03	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
 		  168 Query	SHOW CREATE TABLE `emp`.`routes`
 		  168 Query	SHOW TABLE STATUS LIKE 'routes'
+170420  9:02:48	  168 Query	select * from routes order by id desc limit 1
+170420  9:03:01	  168 Query	select * from routes order by id_route desc limit 1
+170420  9:09:39	  169 Connect	wicak@10.151.36.29 on emp
+		  169 Query	set autocommit=0
+		  169 Query	SELECT * FROM ROUTES
+		  169 Quit	
+170420  9:11:18	  168 Query	select * from routes
+170420  9:12:29	  170 Connect	wicak@10.151.36.29 on emp
+		  170 Query	set autocommit=0
+		  170 Query	SELECT * FROM ROUTES
+		  170 Quit	
+170420  9:26:33	  168 Query	TRUNCATE `routes`
+170420  9:26:34	  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:26:36	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:26:44	  168 Query	SHOW CREATE TABLE `emp`.`member`
+		  168 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`member`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+170420  9:26:45	  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:27:04	  168 Query	SHOW CREATE DATABASE `emp`
+		  168 Query	SHOW CHARSET
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:27:12	  168 Query	SHOW CREATE DATABASE `emp`
+170420  9:27:17	  168 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi_100.csv' REPLACE INTO TABLE `emp`.`routes` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop`, `equipment`)
+170420  9:27:18	  168 Query	SHOW WARNINGS
+170420  9:27:20	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:28:34	  168 Query	update routes set date_change = '2017-04-20 09:00:00'
+170420  9:28:51	  168 Query	update routes set date_change = '2017-04-20 09:00:00' where id_route > 1
+170420  9:28:56	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:29:26	  171 Connect	wicak@10.151.36.29 on emp
+		  171 Query	set autocommit=0
+		  171 Query	SELECT * FROM ROUTES
+		  171 Quit	
+170420  9:31:50	  172 Connect	wicak@10.151.36.29 on emp
+		  172 Query	set autocommit=0
+		  172 Query	SELECT * FROM ROUTES
+		  172 Quit	
+170420  9:31:59	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:32:48	  173 Connect	wicak@10.151.36.29 on emp
+		  173 Query	set autocommit=0
+		  173 Query	SELECT * FROM ROUTES
+		  173 Quit	
+170420  9:33:11	  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+170420  9:33:29	  168 Query	select * from emp.routes
+170420  9:33:42	  174 Connect	wicak@10.151.36.29 on emp
+		  174 Query	set autocommit=0
+		  174 Query	SELECT * FROM routes
+		  174 Quit	
+170420  9:41:17	  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:41:20	  168 Query	TRUNCATE `routes`
+		  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:41:24	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:41:25	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:47:33	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:47:40	  168 Query	SHOW CREATE DATABASE `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420  9:47:45	  168 Query	SHOW CREATE DATABASE `emp`
+170420  9:48:38	  168 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi.csv' REPLACE INTO TABLE `emp`.`routes` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop`, `equipment`)
+170420  9:48:40	  168 Query	SHOW WARNINGS
+170420  9:48:43	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SHOW TABLE STATUS LIKE 'routes'
+170420  9:50:03	  175 Connect	wicak@10.151.36.29 on emp
+		  175 Query	set autocommit=0
+		  175 Query	SELECT * FROM routes
+170420  9:50:04	  175 Quit	
+170420  9:55:00	  168 Query	select * from emp.routes
+170420  9:57:50	  168 Query	insert into routes ('id_route', 'airline', 'id_airline', 'src_airport', 'dst_airport', 'id_dst_airport', 'codeshare', 'stop', 'equipment') values (67664,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+170420  9:58:20	  168 Statistics	
+170420  9:58:22	  168 Statistics	
+170420 10:00:34	  168 Query	insert into routes ('id_route', 'airline', 'id_airline', 'src_airport', 'id_src_airport', 'dst_airport', 'id_dst_airport', 'codeshare', 'stop', 'equipment') 
+values (67664,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+170420 10:00:46	  168 Statistics	
+170420 10:00:51	  168 Statistics	
+170420 10:00:52	  168 Statistics	
+170420 10:02:24	  168 Query	ALTER TABLE `routes`
+	CHANGE COLUMN `stop` `stop_val` INT(11) NULL DEFAULT NULL AFTER `codeshare`
+170420 10:02:26	  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420 10:02:32	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SHOW TABLE STATUS LIKE 'routes'
+170420 10:02:38	  168 Query	insert into routes (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) 
+values (67664,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+170420 10:02:53	  168 Query	TRUNCATE `routes`
+170420 10:02:54	  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420 10:03:13	  168 Query	SHOW CREATE DATABASE `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420 10:03:18	  168 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi.csv' REPLACE INTO TABLE `emp`.`routes` FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop_val`, `equipment`)
+170420 10:03:20	  168 Query	SHOW WARNINGS
+170420 10:03:24	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SHOW TABLE STATUS LIKE 'routes'
+170420 10:04:23	  176 Connect	wicak@10.151.36.29 on emp
+		  176 Query	set autocommit=0
+		  176 Query	SELECT * FROM routes
+170420 10:04:24	  176 Quit	
+170420 10:06:05	  168 Query	insert into routes (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) values (67664,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+		  168 Query	insert into routes (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) values (67665,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+170420 10:56:42	  168 Query	TRUNCATE `routes`
+		  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+		  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420 10:56:48	  168 Query	SHOW CREATE DATABASE `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420 10:56:56	  168 Query	SHOW CREATE DATABASE `emp`
+170420 10:56:57	  168 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi_100.csv' REPLACE INTO TABLE `emp`.`routes` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop_val`, `equipment`)
+		  168 Query	SHOW WARNINGS
+170420 10:57:00	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420 10:57:12	  177 Connect	wicak@10.151.36.29 on emp
+		  177 Query	set autocommit=0
+		  177 Query	SELECT * FROM routes
+		  177 Quit	
+170420 10:58:28	  178 Connect	wicak@10.151.36.29 on emp
+		  178 Query	set autocommit=0
+		  178 Query	SELECT * FROM routes
+		  178 Quit	
+170420 11:00:29	  168 Query	insert into routes (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) values (101,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+		  168 Query	insert into routes (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) values (102,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+170420 11:01:58	  168 Query	delete from routes where id_route = 100
+170420 11:02:03	  168 Query	SELECT * FROM `emp`.`routes` ORDER BY `id_route` ASC LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes`
+170420 11:09:12	  168 Query	RENAME TABLE `routes` TO `routes2`
+		  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:09:33	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:17:03	  168 Query	TRUNCATE `routes2`
+		  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+		  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:17:10	  168 Query	SHOW CREATE DATABASE `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:17:21	  168 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi_100.csv' REPLACE INTO TABLE `emp`.`routes2` FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop_val`, `equipment`)
+		  168 Query	SHOW WARNINGS
+170420 11:17:25	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:18:03	  179 Connect	wicak@10.151.36.29 on emp
+		  179 Query	set autocommit=0
+		  179 Query	SELECT * FROM routes
+		  179 Quit	
+170420 11:19:15	  180 Connect	wicak@10.151.36.29 on emp
+		  180 Query	set autocommit=0
+		  180 Query	SELECT * FROM routes
+		  180 Quit	
+170420 11:20:04	  181 Connect	wicak@10.151.36.29 on emp
+		  181 Query	set autocommit=0
+		  181 Query	SELECT * FROM routes2
+		  181 Quit	
+170420 11:22:06	  168 Query	insert into routes2 (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) values (101,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+		  168 Query	insert into routes2 (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) values (102,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+		  168 Query	delete from routes2 where id_route = 100
+170420 11:22:09	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:33:46	  168 Query	update routes2 set codeshare='Y' WHERE id_route=1
+170420 11:36:02	  168 Query	update routes2 set codeshare='Y', stop_val='1' WHERE airline='ZM'
+170420 11:36:08	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:55:32	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:55:35	  168 Query	TRUNCATE `routes2`
+		  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+		  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:55:38	  168 Query	SHOW CREATE DATABASE `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 11:55:41	  168 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi_100.csv' REPLACE INTO TABLE `emp`.`routes2` FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop_val`, `equipment`)
+170420 11:55:42	  168 Query	SHOW WARNINGS
+170420 11:55:43	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:03:38	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:03:39	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+		  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:03:44	  168 Query	TRUNCATE `routes2`
+		  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:03:45	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:03:46	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:04:25	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:04:28	  168 Query	SHOW CREATE DATABASE `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:04:31	  168 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi_100.csv' REPLACE INTO TABLE `emp`.`routes2` FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop_val`, `equipment`)
+		  168 Query	SHOW WARNINGS
+170420 12:04:33	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:05:10	  182 Connect	wicak@10.151.36.29 on emp
+		  182 Query	set autocommit=0
+		  182 Query	SELECT * FROM routes2
+		  182 Quit	
+170420 12:05:27	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:05:36	  168 Query	INSERT INTO routes (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) VALUES (101,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+		  168 Query	INSERT INTO routes (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) VALUES (102,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+		  168 Query	DELETE FROM routes WHERE id_route = 100
+		  168 Query	UPDATE routes2 SET codeshare='Y' WHERE id_route=1
+		  168 Query	UPDATE routes2 SET codeshare='Y', stop_val='1' WHERE airline='ZM'
+170420 12:05:39	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:06:11	  168 Query	TRUNCATE `routes2`
+		  168 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  168 Query	SHOW TABLE STATUS FROM `emp`
+		  168 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  168 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  168 Query	SHOW TRIGGERS FROM `emp`
+		  168 Query	SHOW EVENTS FROM `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:06:18	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:06:21	  168 Query	SHOW CREATE DATABASE `emp`
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:06:24	  168 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi_100.csv' REPLACE INTO TABLE `emp`.`routes2` FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop_val`, `equipment`)
+		  168 Query	SHOW WARNINGS
+170420 12:06:26	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:06:33	  183 Connect	wicak@10.151.36.29 on emp
+		  183 Query	set autocommit=0
+		  183 Query	SELECT * FROM routes2
+		  183 Quit	
+170420 12:06:54	  168 Query	INSERT INTO routes2 (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) VALUES (101,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+		  168 Query	INSERT INTO routes2 (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) VALUES (102,'ZM','19016','AER','2965','KZN','2990','',0,'CR2')
+		  168 Query	DELETE FROM routes2 WHERE id_route = 100
+170420 12:06:58	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 12:07:08	  168 Query	UPDATE routes2 SET codeshare='Y' WHERE id_route=1
+		  168 Query	UPDATE routes2 SET codeshare='Y', stop_val='1' WHERE airline='ZM'
+170420 12:07:11	  168 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  168 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 22:47:10	  184 Connect	wicak@10.151.43.86 on 
+		  184 Query	SELECT CONNECTION_ID()
+		  184 Query	SET NAMES utf8mb4
+		  184 Query	SHOW STATUS
+		  184 Query	SHOW VARIABLES
+		  184 Query	USE `emp`
+		  184 Query	SHOW COLLATION
+		  184 Query	SHOW ENGINES
+170420 22:47:11	  184 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 22:50:18	  184 Query	UPDATE routes2 SET airline='WW', id_airline='1948' WHERE id_route=102
+170420 22:50:23	  184 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`routes2`
+170420 22:52:29	  184 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`routes2`
+170421  6:32:46	  185 Connect	debian-sys-maint@localhost on 
+		  185 Quit	
+		  186 Connect	debian-sys-maint@localhost on 
+		  186 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		  186 Quit	
+170421  7:17:33	  184 Query	INSERT INTO routes2 (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) VALUES (103,'GA','2520','DPS','3940','SUB','3928','',0,'CR2')
+170421  7:45:26	  187 Connect	wicak@10.151.36.29 on emp
+		  187 Query	set autocommit=0
+		  187 Query	SELECT * FROM ROUTES2
+		  187 Quit	
+170421  7:46:05	  188 Connect	wicak@10.151.36.29 on emp
+		  188 Query	set autocommit=0
+		  188 Query	SELECT * FROM ROUTES2
+		  188 Quit	
+170421  7:46:24	  189 Connect	wicak@10.151.36.29 on emp
+		  189 Query	set autocommit=0
+		  189 Query	SELECT * FROM routes2
+		  189 Quit	
+170421  7:46:39	  190 Connect	wicak@10.151.36.29 on emp
+		  190 Query	set autocommit=0
+		  190 Query	SELECT * FROM routes2
+		  190 Quit	
+170421  7:48:51	  191 Connect	wicak@10.151.36.29 on emp
+		  191 Query	set autocommit=0
+		  191 Query	SELECT * FROM routes2
+		  191 Quit	
+170421  7:57:50	  184 Query	SHOW CREATE TABLE `emp`.`airport`
+170421  7:57:52	  184 Query	SELECT * FROM `emp`.`airport` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`airport`
+170421  7:57:58	  184 Query	SHOW CREATE TABLE `emp`.`daerah3`
+		  184 Query	SELECT * FROM `emp`.`daerah3` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`daerah3`
+170421  7:57:59	  184 Query	SHOW CREATE TABLE `emp`.`member`
+		  184 Query	SELECT * FROM `emp`.`member` ORDER BY `name` ASC LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`member`
+170421  7:58:05	  184 Query	SHOW CREATE TABLE `emp`.`airport`
+		  184 Query	SELECT * FROM `emp`.`airport` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`airport`
+170421  7:58:18	  184 Query	SHOW VARIABLES LIKE 'collation_database'
+170421  8:00:52	  184 Query	CREATE TABLE `airline` (
+	`id_airline` INT NULL,
+	`name` VARCHAR(50) NULL,
+	`alias` VARCHAR(50) NULL,
+	`iata` VARCHAR(50) NULL,
+	`icao` VARCHAR(50) NULL,
+	`callsign` VARCHAR(50) NULL,
+	`country` VARCHAR(50) NULL,
+	`active_stat` INT NULL
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+		  184 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  184 Query	SHOW TABLE STATUS FROM `emp`
+		  184 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  184 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  184 Query	SHOW TRIGGERS FROM `emp`
+		  184 Query	SHOW EVENTS FROM `emp`
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+170421  8:00:53	  184 Query	SHOW CREATE TABLE `emp`.`airline`
+170421  8:01:48	  184 Query	ALTER TABLE `airline`
+	CHANGE COLUMN `name` `name` VARCHAR(100) NULL DEFAULT NULL AFTER `id_airline`,
+	CHANGE COLUMN `alias` `alias` VARCHAR(100) NULL DEFAULT NULL AFTER `name`,
+	CHANGE COLUMN `iata` `iata` VARCHAR(3) NULL DEFAULT NULL AFTER `alias`,
+	CHANGE COLUMN `icao` `icao` VARCHAR(4) NULL DEFAULT NULL AFTER `iata`,
+	CHANGE COLUMN `active_stat` `active_stat` VARCHAR(3) NULL DEFAULT NULL AFTER `country`
+		  184 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  184 Query	SHOW TABLE STATUS FROM `emp`
+		  184 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  184 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  184 Query	SHOW TRIGGERS FROM `emp`
+		  184 Query	SHOW EVENTS FROM `emp`
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+170421  8:04:14	  184 Query	SELECT * FROM `emp`.`airline` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+170421  8:04:25	  184 Query	SHOW CREATE DATABASE `emp`
+		  184 Query	SHOW CHARSET
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+170421  8:04:31	  184 Query	SHOW CREATE DATABASE `emp`
+170421  8:04:39	  184 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\airlines.csv' REPLACE INTO TABLE `emp`.`airline` CHARACTER SET utf8 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_airline`, `name`, `alias`, `iata`, `icao`, `callsign`, `country`, `active_stat`)
+		  184 Query	SHOW WARNINGS
+170421  8:04:45	  184 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\airlines.csv' REPLACE INTO TABLE `emp`.`airline` CHARACTER SET utf8 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (`id_airline`, `name`, `alias`, `iata`, `icao`, `callsign`, `country`, `active_stat`)
+		  184 Query	SHOW WARNINGS
+170421  8:31:22	  184 Query	SHOW CREATE DATABASE `emp`
+170421  8:31:31	  184 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\airlines.csv' REPLACE INTO TABLE `emp`.`airline` FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (`id_airline`, `name`, `alias`, `iata`, `icao`, `callsign`, `country`, `active_stat`)
+		  184 Query	SHOW WARNINGS
+170421  8:46:47	  184 Query	SHOW CREATE DATABASE `emp`
+170421  8:46:52	  184 Query	SHOW CREATE DATABASE `emp`
+170421  8:46:56	  184 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\airlines_heidi.csv' REPLACE INTO TABLE `emp`.`airline` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (`id_airline`, `name`, `alias`, `iata`, `icao`, `callsign`, `country`, `active_stat`)
+		  184 Query	SHOW WARNINGS
+170421  8:47:04	  184 Query	SELECT * FROM `emp`.`airline` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+170421  8:47:05	  184 Query	SHOW TABLE STATUS LIKE 'airline'
+170421  8:47:36	  184 Query	TRUNCATE `airline`
+		  184 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  184 Query	SHOW TABLE STATUS FROM `emp`
+		  184 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  184 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  184 Query	SHOW TRIGGERS FROM `emp`
+		  184 Query	SHOW EVENTS FROM `emp`
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+		  184 Query	SELECT * FROM `emp`.`airline` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+170421  8:47:40	  184 Query	SHOW CREATE DATABASE `emp`
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+170421  8:47:58	  184 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\airlines_heidi.csv' REPLACE INTO TABLE `emp`.`airline` FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_airline`, `name`, `alias`, `iata`, `icao`, `callsign`, `country`, `active_stat`)
+170421  8:47:59	  184 Query	SHOW WARNINGS
+170421  8:48:04	  184 Query	SELECT * FROM `emp`.`airline` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`airline`
+		  184 Query	SHOW TABLE STATUS LIKE 'airline'
+170421  8:48:17	  184 Query	SHOW CREATE TABLE `emp`.`airport`
+		  184 Query	SELECT * FROM `emp`.`airport` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`airport`
+170421 11:29:47	  184 Query	SHOW CREATE TABLE `emp`.`routes2`
+		  184 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  184 Query	SHOW CREATE TABLE `emp`.`routes2`
+170421 11:31:41	  184 Statistics	
+170421 11:50:44	  192 Connect	wicak@10.181.1.117 on 
+		  192 Query	SELECT CONNECTION_ID()
+		  192 Query	SET NAMES utf8mb4
+		  192 Query	SHOW STATUS
+		  192 Query	SHOW VARIABLES
+		  192 Query	USE `emp`
+		  192 Query	SHOW CREATE TABLE `emp`.`routes2`
+		  192 Query	SHOW COLLATION
+		  192 Query	SHOW ENGINES
+		  192 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  192 Query	SHOW CREATE TABLE `emp`.`routes2`
+170421 11:59:04	  192 Query	INSERT INTO routes2 (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) VALUES (104,'QG','19305','DPS','3940','SUB','3928','',0,'CR2')
+		  192 Query	INSERT INTO routes2 (id_route, airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment) VALUES (105,'QG','19305','SUB','3928','DPS','3940','',0,'CR2')
+		  192 Query	UPDATE routes2 SET codeshare='Y', stop_val=1 WHERE id_route=104
+170422  6:41:39	  193 Connect	debian-sys-maint@localhost on 
+170422  6:41:40	  193 Quit	
+		  194 Connect	debian-sys-maint@localhost on 
+		  194 Refresh	
+/usr/sbin/mysqld, Version: 5.5.54-0ubuntu0.14.04.1-log ((Ubuntu)). started with:
+Tcp port: 3306  Unix socket: /var/run/mysqld/mysqld.sock
+Time                 Id Command    Argument
+		  194 Quit	
+170422 13:35:37	  195 Connect	wicak@10.151.43.178 on 
+		  195 Query	SELECT CONNECTION_ID()
+		  195 Query	SET NAMES utf8mb4
+		  195 Query	SHOW STATUS
+		  195 Query	SHOW VARIABLES
+		  195 Query	USE `emp`
+		  195 Query	SHOW CREATE TABLE `emp`.`routes2`
+170422 13:35:38	  195 Query	SHOW COLLATION
+		  195 Query	SHOW ENGINES
+		  195 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  195 Query	SHOW CREATE TABLE `emp`.`routes2`
+170422 13:35:48	  195 Query	TRUNCATE `routes2`
+		  195 Query	SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='emp'
+		  195 Query	SHOW TABLE STATUS FROM `emp`
+		  195 Query	SHOW FUNCTION STATUS WHERE `Db`='emp'
+		  195 Query	SHOW PROCEDURE STATUS WHERE `Db`='emp'
+		  195 Query	SHOW TRIGGERS FROM `emp`
+170422 13:35:49	  195 Query	SHOW EVENTS FROM `emp`
+		  195 Query	SHOW CREATE TABLE `emp`.`routes2`
+		  195 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+		  195 Query	SHOW CREATE TABLE `emp`.`routes2`
+170422 13:35:55	  195 Query	SHOW CREATE DATABASE `emp`
+		  195 Query	SHOW CHARSET
+		  195 Query	SHOW CREATE TABLE `emp`.`routes2`
+170422 13:36:03	  195 Query	SHOW CREATE DATABASE `emp`
+170422 13:36:06	  195 Query	LOAD DATA LOW_PRIORITY LOCAL INFILE 'D:\\TC13\\Semester 8\\Tugas Akhir\\sync_app\\CSV\\flights.org\\routes_heidi_100.csv' REPLACE INTO TABLE `emp`.`routes2` CHARACTER SET latin1 FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' ESCAPED BY '"' LINES TERMINATED BY '\r\n' (`id_route`, `airline`, `id_airline`, `src_airport`, `id_src_airport`, `dst_airport`, `id_dst_airport`, `codeshare`, `stop_val`, `equipment`, `date_change`)
+		  195 Query	SHOW WARNINGS
+170422 13:36:16	  195 Query	SELECT * FROM `emp`.`routes2` LIMIT 1000
+170422 13:36:17	  195 Query	SHOW CREATE TABLE `emp`.`routes2`
+170422 13:36:48	  195 Query	select * from routes2
