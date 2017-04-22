@@ -1,0 +1,110 @@
+1;Goroka Airport;Goroka;Papua New Guinea;GKA;AYGA;-6.081.689.834.590.000;145.391.998.291;5282;10;U;Pacific/Port_Moresby;airport;OurAirports
+2;Madang Airport;Madang;Papua New Guinea;MAG;AYMD;-520.707.988.739;145.789.001.465;20;10;U;Pacific/Port_Moresby;airport;OurAirports
+3;Mount Hagen Kagamuga Airport;Mount Hagen;Papua New Guinea;HGU;AYMH;-5.826.789.855.957.030;14.429.600.524.902.300;5388;10;U;Pacific/Port_Moresby;airport;OurAirports
+4;Nadzab Airport;Nadzab;Papua New Guinea;LAE;AYNZ;-6.569.803;146.725.977;239;10;U;Pacific/Port_Moresby;airport;OurAirports
+5;Port Moresby Jacksons International Airport;Port Moresby;Papua New Guinea;POM;AYPY;-9.443.380.355.834.960;14.722.000.122.070.300;146;10;U;Pacific/Port_Moresby;airport;OurAirports
+6;Wewak International Airport;Wewak;Papua New Guinea;WWK;AYWK;-358.383.011.818;143.669.006.348;19;10;U;Pacific/Port_Moresby;airport;OurAirports
+7;Narsarsuaq Airport;Narssarssuaq;Greenland;UAK;BGBW;611.604.995.728;-454.259.986.877;112;-3;E;America/Godthab;airport;OurAirports
+8;Godthaab / Nuuk Airport;Godthaab;Greenland;GOH;BGGH;6.419.090.271;-516.781.005.859;283;-3;E;America/Godthab;airport;OurAirports
+9;Kangerlussuaq Airport;Sondrestrom;Greenland;SFJ;BGSF;670.122.218.992;-507.116.031.647;165;-3;E;America/Godthab;airport;OurAirports
+10;Thule Air Base;Thule;Greenland;THU;BGTL;765.311.965.942;-687.032.012.939;251;-4;E;America/Thule;airport;OurAirports
+11;Akureyri Airport;Akureyri;Iceland;AEY;BIAR;6.566.000.366.210.930;-1.807.270.050.048.820;6;0;N;Atlantic/Reykjavik;airport;OurAirports
+12;Egilsstaðir Airport;Egilsstadir;Iceland;EGS;BIEG;652.833.023.071.289;-14.401.399.612.426.700;76;0;N;Atlantic/Reykjavik;airport;OurAirports
+13;Hornafjörður Airport;Hofn;Iceland;HFN;BIHN;64.295.601;-152.272;24;0;N;Atlantic/Reykjavik;airport;OurAirports
+14;Húsavík Airport;Husavik;Iceland;HZK;BIHU;65.952.301;-17.426.001;48;0;N;Atlantic/Reykjavik;airport;OurAirports
+15;Ísafjörður Airport;Isafjordur;Iceland;IFJ;BIIS;6.605.809.783.935.540;-23.135.299.682.617.100;8;0;N;Atlantic/Reykjavik;airport;OurAirports
+16;Keflavik International Airport;Keflavik;Iceland;KEF;BIKF;63.985.000.610.352;-22.605.600.357.056;171;0;N;Atlantic/Reykjavik;airport;OurAirports
+17;Patreksfjörður Airport;Patreksfjordur;Iceland;PFJ;BIPA;65.555.801;-23.965;11;0;N;Atlantic/Reykjavik;airport;OurAirports
+18;Reykjavik Airport;Reykjavik;Iceland;RKV;BIRK;641.299.972.534;-219.405.994.415;48;0;N;Atlantic/Reykjavik;airport;OurAirports
+19;Siglufjörður Airport;Siglufjordur;Iceland;SIJ;BISI;66.133.301;-189.167;10;0;N;Atlantic/Reykjavik;airport;OurAirports
+20;Vestmannaeyjar Airport;Vestmannaeyjar;Iceland;VEY;BIVM;6.342.430.114.746.090;-20.278.900.146.484.300;326;0;N;Atlantic/Reykjavik;airport;OurAirports
+21;Sault Ste Marie Airport;Sault Sainte Marie;Canada;YAM;CYAM;4.648.500.061.035.150;-845.093.994.140.625;630;-5;A;America/Toronto;airport;OurAirports
+22;Winnipeg / St. Andrews Airport;Winnipeg;Canada;YAV;CYAV;500.564.002.991;-9.703.250.122.070.000;760;-6;A;America/Winnipeg;airport;OurAirports
+23;Halifax / CFB Shearwater Heliport;Halifax;Canada;YAW;CYAW;446.397.018.433;-63.499.401.092.499.900;144;-4;A;America/Halifax;airport;OurAirports
+24;St. Anthony Airport;St. Anthony;Canada;YAY;CYAY;513.918.991.089;-56.083.099.365.200.000;108;-3.5;A;America/St_Johns;airport;OurAirports
+25;Tofino / Long Beach Airport;Tofino;Canada;YAZ;CYAZ;49.079.833;-125.775.583;80;-8;A;America/Vancouver;airport;OurAirports
+26;Kugaaruk Airport;Pelly Bay;Canada;YBB;CYBB;68.534.401;-89.808.098;56;-7;A;America/Edmonton;airport;OurAirports
+27;Baie Comeau Airport;Baie Comeau;Canada;YBC;CYBC;4.913.249.969.482.420;-6.820.439.910.888.670;71;-5;A;America/Toronto;airport;OurAirports
+28;CFB Bagotville;Bagotville;Canada;YBG;CYBG;4.833.060.073.852.530;-7.099.639.892.578.120;522;-5;A;America/Toronto;airport;OurAirports
+29;Baker Lake Airport;Baker Lake;Canada;YBK;CYBK;6.429.889.678.960.000;-96.077.796.936;59;-6;A;America/Winnipeg;airport;OurAirports
+30;Campbell River Airport;Campbell River;Canada;YBL;CYBL;49.950.801.849.365.200;-12.527.100.372.314.400;346;-8;A;America/Vancouver;airport;OurAirports
+31;Brandon Municipal Airport;Brandon;Canada;YBR;CYBR;49.91;-99.951.897;1343;-6;A;America/Winnipeg;airport;OurAirports
+32;Cambridge Bay Airport;Cambridge Bay;Canada;YCB;CYCB;691.081.008.911;-105.138.000.488;90;-7;A;America/Edmonton;airport;OurAirports
+33;Nanaimo Airport;Nanaimo;Canada;YCD;CYCD;49.054.970.224.899.900;-123.869.862.556;92;-8;A;America/Vancouver;airport;OurAirports
+34;Castlegar/West Kootenay Regional Airport;Castlegar;Canada;YCG;CYCG;492.963.981.628;-117.632.003.784;1624;-8;A;America/Vancouver;airport;OurAirports
+35;Miramichi Airport;Chatham;Canada;YCH;CYCH;47.007.801;-65.449.203;108;-4;A;America/Halifax;airport;OurAirports
+36;Charlo Airport;Charlo;Canada;YCL;CYCL;47.990.799;-66.330.299;132;-4;A;America/Halifax;airport;OurAirports
+37;Kugluktuk Airport;Coppermine;Canada;YCO;CYCO;6.781.670.379.639.990;-115.143.997.192;74;-7;A;America/Edmonton;airport;OurAirports
+38;Coronation Airport;Coronation;Canada;YCT;CYCT;520.750.007.629;-111.444.999.695;2595;-7;A;America/Edmonton;airport;OurAirports
+39;Chilliwack Airport;Chilliwack;Canada;YCW;CYCW;491.528.015.137;-121.939.002.991;32;-8;A;America/Vancouver;airport;OurAirports
+40;Clyde River Airport;Clyde River;Canada;YCY;CYCY;704.860.992.432;-685.167.007.446;87;-5;A;America/Toronto;airport;OurAirports
+41;Coral Harbour Airport;Coral Harbour;Canada;YZS;CYZS;641.932.983.398;-833.593.978.882;210;-5;A;America/Coral_Harbour;airport;OurAirports
+42;Dawson City Airport;Dawson;Canada;YDA;CYDA;6.404.309.844.970.700;-1.391.280.059.814.450;1215;-8;A;America/Vancouver;airport;OurAirports
+43;Burwash Airport;Burwash;Canada;YDB;CYDB;6.137.110.137.939.450;-13.904.100.036.621.000;2647;-8;A;America/Vancouver;airport;OurAirports
+44;Princeton Airport;Princeton;Canada;YDC;CYDC;494.681.015.015;-120.511.001.587;2298;-8;A;America/Vancouver;airport;OurAirports
+45;Deer Lake Airport;Deer Lake;Canada;YDF;CYDF;4.921.080.017.089.840;-5.739.139.938.354.490;72;-3.5;A;America/St_Johns;airport;OurAirports
+46;Dease Lake Airport;Dease Lake;Canada;YDL;CYDL;584.221.992.493;-130.031.997.681;2600;-8;A;America/Vancouver;airport;OurAirports
+47;Dauphin Barker Airport;Dauphin;Canada;YDN;CYDN;51.100.799.560.546.800;-100.052.001.953.125;999;-6;A;America/Winnipeg;airport;OurAirports
+48;Dawson Creek Airport;Dawson Creek;Canada;YDQ;CYDQ;557.422.981.262.207;-12.018.299.865.722.600;2148;-7;A;America/Dawson_Creek;airport;OurAirports
+49;Edmonton International Airport;Edmonton;Canada;YEG;CYEG;53.309.700.012.200.000;-113.580.001.831;2373;-7;A;America/Edmonton;airport;OurAirports
+50;Arviat Airport;Eskimo Point;Canada;YEK;CYEK;610.942.001.343;-9.407.080.078.119.990;32;-6;A;America/Winnipeg;airport;OurAirports
+51;Estevan Airport;Estevan;Canada;YEN;CYEN;492.103.004.456;-102.966.003.418;1905;-6;N;America/Regina;airport;OurAirports
+52;Edson Airport;Edson;Canada;YET;CYET;53.578.899.383.499.900;-116.464.996.338;3043;-7;A;America/Edmonton;airport;OurAirports
+53;Eureka Airport;Eureka;Canada;YEU;CYEU;799.946.975.708;-85.814.201.355;256;-6;A;America/Winnipeg;airport;OurAirports
+54;Inuvik Mike Zubko Airport;Inuvik;Canada;YEV;CYEV;6.830.419.921.880.000;-133.483.001.709;224;-7;A;America/Edmonton;airport;OurAirports
+55;Iqaluit Airport;Iqaluit;Canada;YFB;CYFB;63.756.401.062;-685.558.013.916;110;-5;A;America/Toronto;airport;OurAirports
+56;Fredericton Airport;Fredericton;Canada;YFC;CYFC;45.868.900.299.072.200;-6.653.720.092.773.430;68;-4;A;America/Halifax;airport;OurAirports
+57;Forestville Airport;Forestville;Canada;\N;CYFE;4.874.610.137.939.450;-6.909.719.848.632.810;293;-5;A;America/Toronto;airport;OurAirports
+58;Flin Flon Airport;Flin Flon;Canada;YFO;CYFO;546.781.005.859.375;-10.168.199.920.654.200;997;-6;A;America/Winnipeg;airport;OurAirports
+59;Fort Resolution Airport;Fort Resolution;Canada;YFR;CYFR;611.808.013.916;-113.690.002.441;526;-7;A;America/Edmonton;airport;OurAirports
+60;Fort Simpson Airport;Fort Simpson;Canada;YFS;CYFS;6.176.020.050.048.820;-12.123.699.951.171.800;555;-7;A;America/Edmonton;airport;OurAirports
+61;Kingston Norman Rogers Airport;Kingston;Canada;YGK;CYGK;4.422.529.983.520.500;-765.969.009.399.414;305;-5;A;America/Toronto;airport;OurAirports
+62;La Grande Rivière Airport;La Grande Riviere;Canada;YGL;CYGL;53.625.301.361.083.900;-777.042.007.446.289;639;-5;A;America/Toronto;airport;OurAirports
+63;Gaspé (Michel-Pouliot) Airport;Gaspe;Canada;YGP;CYGP;487.752.990.723;-644.785.995.483;112;-5;A;America/Toronto;airport;OurAirports
+64;Geraldton Greenstone Regional Airport;Geraldton;Canada;YGQ;CYGQ;4.977.830.123.901.360;-8.693.939.971.923.820;1144;-5;A;America/Toronto;airport;OurAirports
+65;Îles-de-la-Madeleine Airport;Iles De La Madeleine;Canada;YGR;CYGR;4.742.470.169.067.380;-61.778.099.060.058.500;35;-5;A;America/Toronto;airport;OurAirports
+66;Hudson Bay Airport;Hudson Bay;Canada;YHB;CYHB;528.166.999.817;-102.310.997.009;1175;-6;N;America/Regina;airport;OurAirports
+67;Dryden Regional Airport;Dryden;Canada;YHD;CYHD;4.983.169.937.133.780;-9.274.420.166.015.620;1354;-6;A;America/Winnipeg;airport;OurAirports
+68;Ulukhaktok Holman Airport;Holman Island;Canada;YHI;CYHI;7.076.280.212.402.340;-11.780.599.975.585.900;117;-7;A;America/Edmonton;airport;OurAirports
+69;Gjoa Haven Airport;Gjoa Haven;Canada;YHK;CYHK;68.635.597.229;-9.584.970.092.770.000;152;-7;A;America/Edmonton;airport;OurAirports
+70;John C. Munro Hamilton International Airport;Hamilton;Canada;YHM;CYHM;43.173.599.243.199.900;-7.993.499.755.859.990;780;-5;A;America/Toronto;airport;OurAirports
+71;Montréal / Saint-Hubert Airport;Montreal;Canada;YHU;CYHU;455.175.018.311;-734.169.006.348;90;-5;A;America/Toronto;airport;OurAirports
+72;Hay River / Merlyn Carter Airport;Hay River;Canada;YHY;CYHY;608.396.987.915;-115.782.997.131;541;-7;A;America/Edmonton;airport;OurAirports
+73;Halifax / Stanfield International Airport;Halifax;Canada;YHZ;CYHZ;448.807.983.398;-635.085.983.276;477;-4;A;America/Halifax;airport;OurAirports
+74;Atikokan Municipal Airport;Atikokan;Canada;YIB;CYIB;487.738.990.784;-916.386.032.104;1408;-5;A;America/Coral_Harbour;airport;OurAirports
+75;Pond Inlet Airport;Pond Inlet;Canada;YIO;CYIO;726.832.962.036;-779.666.976.929;181;-5;A;America/Toronto;airport;OurAirports
+76;St Jean Airport;St. Jean;Canada;YJN;CYJN;4.529.439.926.147.460;-7.328.109.741.210.930;136;-5;A;America/Toronto;airport;OurAirports
+77;Stephenville Airport;Stephenville;Canada;YJT;CYJT;485.442.008.972.168;-5.854.999.923.706.050;84;-3.5;A;America/St_Johns;airport;OurAirports
+78;Kamloops Airport;Kamloops;Canada;YKA;CYKA;507.022.018.433;-120.444.000.244;1133;-8;A;America/Vancouver;airport;OurAirports
+79;Waterloo Airport;Waterloo;Canada;YKF;CYKF;43.460.800.170.899.900;-803.786.010.742;1055;-5;A;America/Toronto;airport;OurAirports
+80;Schefferville Airport;Schefferville;Canada;YKL;CYKL;54.805.301.666.259.700;-668.052.978.515.625;1709;-5;A;America/Toronto;airport;OurAirports
+81;Kindersley Airport;Kindersley;Canada;YKY;CYKY;515.175.018.311;-109.180.999.756;2277;-6;N;America/Regina;airport;OurAirports
+82;Buttonville Municipal Airport;Toronto;Canada;YKZ;CYKZ;4.386.220.169.067.380;-7.937.000.274.658.200;650;-5;A;America/Toronto;airport;OurAirports
+83;Chapleau Airport;Chapleau;Canada;YLD;CYLD;4.781.999.969.482.420;-833.467.025.756.836;1470;-5;A;America/Toronto;airport;OurAirports
+84;Meadow Lake Airport;Meadow Lake;Canada;YLJ;CYLJ;54.125.301.361.083.900;-10.852.300.262.451.100;1576;-6;N;America/Regina;airport;OurAirports
+85;Lloydminster Airport;Lloydminster;Canada;YLL;CYLL;53.309.200.286.865.200;-110.072.998.046.875;2193;-7;A;America/Edmonton;airport;OurAirports
+86;Alert Airport;Alert;Canada;YLT;CYLT;8.251.779.937.740.000;-622.806.015.015;100;-5;A;America/Toronto;airport;OurAirports
+87;Kelowna International Airport;Kelowna;Canada;YLW;CYLW;499.561.004.639;-119.377.998.352;1421;-8;A;America/Vancouver;airport;OurAirports
+88;Mayo Airport;Mayo;Canada;YMA;CYMA;6.361.640.167.236.320;-1.358.679.962.158.200;1653;-8;A;America/Vancouver;airport;OurAirports
+89;Moose Jaw Air Vice Marshal C. M. McEwen Airport;Moose Jaw;Canada;YMJ;CYMJ;50.330.299.377.441.400;-10.555.899.810.791.000;1892;-6;N;America/Regina;airport;OurAirports
+90;Fort McMurray Airport;Fort Mcmurray;Canada;YMM;CYMM;56.653.301.239;-111.222.000.122;1211;-7;A;America/Edmonton;airport;OurAirports
+91;Moosonee Airport;Moosonee;Canada;YMO;CYMO;51.291.099.548.339.800;-8.060.780.334.472.650;30;-5;A;America/Toronto;airport;OurAirports
+92;Maniwaki Airport;Maniwaki;Canada;YMW;CYMW;462.728.004.456;-759.906.005.859;656;-5;A;America/Toronto;airport;OurAirports
+93;Montreal International (Mirabel) Airport;Montreal;Canada;YMX;CYMX;456.795.005.798;-740.386.962.891;270;-5;A;America/Toronto;airport;OurAirports
+94;Natashquan Airport;Natashquan;Canada;YNA;CYNA;50.189.998.626.708.900;-6.178.919.982.910.150;39;-5;A;America/Toronto;airport;OurAirports
+95;Ottawa / Gatineau Airport;Gatineau;Canada;YND;CYND;45.521.701.812.699.900;-755.635.986.328;211;-5;A;America/Toronto;airport;OurAirports
+96;Matagami Airport;Matagami;Canada;YNM;CYNM;4.976.169.967.651.360;-7.780.280.303.955.070;918;-5;A;America/Toronto;airport;OurAirports
+97;Old Crow Airport;Old Crow;Canada;YOC;CYOC;6.757.060.241.699.210;-13.983.900.451.660.100;824;-8;A;America/Vancouver;airport;OurAirports
+98;CFB Cold Lake;Cold Lake;Canada;YOD;CYOD;54.404.998.779.296.800;-11.027.899.932.861.300;1775;-7;A;America/Edmonton;airport;OurAirports
+99;High Level Airport;High Level;Canada;YOJ;CYOJ;5.862.139.892.578.120;-11.716.500.091.552.700;1110;-7;A;America/Edmonton;airport;OurAirports
+100;Ottawa Macdonald-Cartier International Airport;Ottawa;Canada;YOW;CYOW;453.224.983.215.332;-7.566.919.708.251.950;374;-5;A;America/Toronto;airport;OurAirports
+101;Prince Albert Glass Field;Prince Albert;Canada;YPA;CYPA;53.214.199.066.199.900;-105.672.996.521;1405;-6;N;America/Regina;airport;OurAirports
+102;Peace River Airport;Peace River;Canada;YPE;CYPE;56.226.898.193.359.300;-1.174.469.985.961.910;1873;-7;A;America/Edmonton;airport;OurAirports
+103;Southport Airport;Portage-la-prairie;Canada;YPG;CYPG;49.903.099;-98.273.817;885;-6;A;America/Winnipeg;airport;OurAirports
+104;Pitt Meadows Airport;Pitt Meadows;Canada;\N;CYPK;4.921.609.878.540.030;-12.270.999.908.447.200;11;-8;A;America/Vancouver;airport;OurAirports
+105;Pickle Lake Airport;Pickle Lake;Canada;YPL;CYPL;514.463.996.887.207;-9.021.420.288.085.930;1267;-5;A;America/Coral_Harbour;airport;OurAirports
+106;Port Menier Airport;Port Menier;Canada;YPN;CYPN;4.983.639.907.836.910;-642.885.971.069.336;167;-5;A;America/Toronto;airport;OurAirports
+107;Peterborough Airport;Peterborough;Canada;YPQ;CYPQ;4.422.999.954.223.630;-7.836.329.650.878.900;628;-5;A;America/Toronto;airport;OurAirports
+108;Prince Rupert Airport;Prince Pupert;Canada;YPR;CYPR;54.286.098.480.199.900;-130.445.007.324;116;-8;A;America/Vancouver;airport;OurAirports
+109;Fort Chipewyan Airport;Fort Chipewyan;Canada;YPY;CYPY;587.672.004.699.707;-11.111.699.676.513.600;761;-7;A;America/Edmonton;airport;OurAirports
+110;Muskoka Airport;Muskoka;Canada;YQA;CYQA;44.974.700.927.734.300;-7.930.329.895.019.530;925;-5;A;America/Toronto;airport;OurAirports
