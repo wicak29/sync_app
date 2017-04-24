@@ -24,7 +24,7 @@ def getLastSync(data):
 	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
 	cursor = db.cursor()
 
-	sql = "SELECT * FROM waktu_sinkronisasi ORDER BY waktu DESC LIMIT 1"
+	sql = "SELECT * FROM log_sinkronisasi ORDER BY waktu DESC LIMIT 1"
 	try :
 		cursor.execute(sql)
 		row = cursor.fetchone()
@@ -79,13 +79,18 @@ def getDataAfterLastSync(last_sync):
 	db.close()
 
 
-def insertNewSync(data):
-	host = data['host']
-	username = data['username']
-	password = data['password']
-	db_name = data['db_name']
-	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
-	cursor = db.cursor()
+def insertNewSync(sync_db, mysql_db, hbase_db):
+	# DB Log sinkronisasi
+	host = sync_db['host']
+	username = sync_db['username']
+	password = sync_db['password']
+	db_name = sync_db['db_name']
+
+	# DB MySQL
+	host_mysql = mysql_db['host']
+
+	# DB HBase
+	host_hbase = hbase_db['host']
 
 	ts = time.time()
 	timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -93,7 +98,7 @@ def insertNewSync(data):
 	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)	
 	cursor = db.cursor()
 
-	sql = "INSERT INTO waktu_sinkronisasi (waktu) VALUES ('{0}')".format(timestamp)
+	sql = "INSERT INTO log_sinkronisasi (waktu, ip_src, ip_dst, status) VALUES ('{0}', '{1}', '{2}', '{3}')".format(timestamp,host_mysql,host_hbase,0)
 	print 'sql : ', sql
 
 	try :
@@ -141,6 +146,15 @@ def getConfMysqlDb():
 	}
 	return conf_list
 
+def getConfHbaseDb():
+	parser = SafeConfigParser()
+	parser.read('configuration.ini')
+
+	conf_list = {
+		'host' : parser.get('hbase_db', 'host')
+	}
+	return conf_list
+
 def getConfSyncLogDb():
 	parser = SafeConfigParser()
 	parser.read('configuration.ini')
@@ -182,7 +196,7 @@ def mainGetFile() :
 	# webbrowser.open_new(os.getcwd()+'/get_log_query.log')
 	print ("FILE GOT!")
 
-def initiateTransformMysqlToHbase(mysql_db, sync_db):
+def initiateTransformMysqlToHbase(mysql_db, hbase_db, sync_db):
 	print "Belum pernah sinkronisasi"
 	init = initiateDBtoHBase(mysql_db)
 	if (init) :
@@ -199,7 +213,7 @@ def initiateTransformMysqlToHbase(mysql_db, sync_db):
 				try : 
 					result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
 					if (result_phoenix):
-						insert_time = insertNewSync(sync_db)
+						insert_time = insertNewSync(sync_db, mysql_db, hbase_db)
 						if (insert_time) :
 							print 'Inisialisasi berhasil dilakukan, last insert id: ', insert_time
 				except Exception as e:
@@ -211,6 +225,7 @@ allow_q = ["insert", "delete", "update"]
 
 if __name__ == '__main__':
 	data_mysql = getConfMysqlDb()
+	data_hbase = getConfHbaseDb()
 	data_sync_db = getConfSyncLogDb()
 	data_ssh = getSshAccess()
 
@@ -231,7 +246,7 @@ if __name__ == '__main__':
 		print 'waktu sekarang: ', present
 
 		if (not last_sync) :
-			initiateTransformMysqlToHbase(data_mysql, data_sync_db)
+			initiateTransformMysqlToHbase(data_mysql, data_hbase, data_sync_db)
 			# print "Belum pernah sinkronisasi"
 			# init = initiateDBtoHBase(data_mysql)
 			# if (init) :
@@ -336,7 +351,7 @@ if __name__ == '__main__':
 					print(e)
 
 				if (res_phoenix) :
-					insert_time = insertNewSync(data_sync_db)
+					insert_time = insertNewSync(data_sync_db, data_mysql, data_hbase)
 					if (insert_time) :
 						print 'Sync telah dilakukan, last insert id: ', insert_time
 					print 'Sync berhasil dilakukan'
