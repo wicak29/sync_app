@@ -181,7 +181,7 @@ def select_all_hbase():
 	
 	routes_list = []
 	data = cursor.fetchall()
-	data_numrows = int(cursor.rowcount)
+	data_numrows = len(data)
 	print "[log] jumlah baris: ", len(data)
 	for row in data :
 		route_temp = {
