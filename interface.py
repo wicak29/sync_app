@@ -3,13 +3,15 @@ import phoenixdb
 from flask import Flask, request
 from flask import jsonify
 import mysql_kueri
+import c_db
+from ConfigParser import SafeConfigParser
 
 app = Flask(__name__)
 
-data_mysql = getConfMysqlDb()
-data_hbase = getConfHbaseDb()
-data_sync_db = getConfSyncLogDb()
-data_ssh = getSshAccess()
+data_mysql = c_db.getConfMysqlDb()
+data_hbase = c_db.getConfHbaseDb()
+data_sync_db = c_db.getConfSyncLogDb()
+data_ssh = c_db.getSshAccess()
 
 def connect_db_mysql(data):
 	host = data['host']
@@ -20,9 +22,9 @@ def connect_db_mysql(data):
 	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
 	return db
 
+# Insert pasti dilakukan di MySQL database
 def insert_into(table, data):
-	db = connect_db_mysql()
-	db = MySQLdb.connect("10.151.36.129","wicak","m3l0dy!","emp" )
+	db = connect_db_mysql(data_mysql)
 	cursor = db.cursor()
 
 	kueri = mysql_kueri.insert_into_routes(table, data)
@@ -37,10 +39,8 @@ def insert_into(table, data):
 		return 0
 
 def hapus_rute(table, data):
-	db = MySQLdb.connect("10.151.36.129","wicak","m3l0dy!","emp" )
+	db = connect_db_mysql(data_mysql)
 	cursor = db.cursor()
-	print data
-	print table
 
 	kueri = mysql_kueri.delete_routes_by_id(table, data)
 	print "kueri: ", kueri
@@ -52,6 +52,94 @@ def hapus_rute(table, data):
 		return 1
 	else:
 		return 0
+
+def select_all_routes_mysql():
+	db = connect_db_mysql(data_mysql)
+	cursor = db.cursor()
+
+	query_string = "SELECT * FROM routes2"
+	cursor.execute(query_string)
+
+	routes_list = []
+	data = cursor.fetchall()
+	data_numrows = int(cursor.rowcount)
+	for row in data :
+		route_temp = {
+			'id_route': row[0],
+			'airline': row[1],
+			'id_airline': row[2],
+			'src_airport': row[3],
+			'id_src_airport': row[4],
+			'dst_airport': row[5],
+			'id_dst_airport': row[6],
+			'codeshare': row[7],
+			'stop_val': row[8],
+			'equipment': row[9],
+			'log_date': row[10]
+		}
+		routes_list.append(route_temp)
+
+	db.close()
+	result = { 
+		"Host" : "10.151.36.129",
+		"Database" : "MySQL",
+		"Flight_Rows" : data_numrows,
+		"Flight_Routes" : routes_list
+		}
+	return result
+
+def select_all_routes_hbase():
+	database_url = 'http://localhost:8765/'
+	conn = phoenixdb.connect(database_url, autocommit=True)
+
+	cursor = conn.cursor()
+	a = cursor.execute("SELECT * FROM ROUTES2")
+	
+	routes_list = []
+	data = cursor.fetchall()
+	data_numrows = len(data)
+	print "[log] jumlah baris: ", len(data)
+	for row in data :
+		route_temp = {
+			'id_route': row[0],
+			'airline': row[1],
+			'id_airline': row[2],
+			'src_airport': row[3],
+			'id_src_airport': row[4],
+			'dst_airport': row[5],
+			'id_dst_airport': row[6],
+			'codeshare': row[7],
+			'stop_val': row[8],
+			'equipment': row[9],
+			'log_date': row[10]
+		}
+		routes_list.append(route_temp)
+
+	result = { 
+		"Host" : "10.151.36.29",
+		"Database" : "HBase",
+		"Flight_Rows" : data_numrows,
+		"Flight_Routes" : routes_list
+		}
+	return result
+
+def getLastSync(data):
+	host = data['host']
+	username = data['username']
+	password = data['password']
+	db_name = data['db_name']
+
+	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
+	cursor = db.cursor()
+
+	sql = "SELECT * FROM log_sinkronisasi ORDER BY waktu DESC LIMIT 1"
+	try :
+		cursor.execute(sql)
+		row = cursor.fetchone()
+		return row
+	except :
+		print "Error, unable to fetch Last Sync data"
+		return 0		
 
 @app.route('/insert_routes', methods=['POST'])
 def insert_routes():
@@ -151,80 +239,38 @@ def delete_routes_by_id():
 
 		return jsonify(result)
 
-@app.route('/select_all_mysql')
-def select_all_mysql():	
-	db = MySQLdb.connect("10.151.36.129","wicak","m3l0dy!","emp" )
+# Melakukan SELECT ALL pada tabel ROUTES
+@app.route('/select_all_routes')
+def select_all_routes():
+	print "[log] Select all from table route"
+	# Cek status Sinkronisasi
+	db = connect_db_mysql(data_sync_db)
 	cursor = db.cursor()
 
-	query_string = "SELECT * FROM routes2"
-	cursor.execute(query_string)
+	last = getLastSync(data_sync_db)
+	# print last
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		result = select_all_routes_mysql()
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		result = select_all_routes_hbase()
 
-	routes_list = []
-	data = cursor.fetchall()
-	data_numrows = int(cursor.rowcount)
-	for row in data :
-		route_temp = {
-			'id_route': row[0],
-			'airline': row[1],
-			'id_airline': row[2],
-			'src_airport': row[3],
-			'id_src_airport': row[4],
-			'dst_airport': row[5],
-			'id_dst_airport': row[6],
-			'codeshare': row[7],
-			'stop_val': row[8],
-			'equipment': row[9],
-			'log_date': row[10]
-		}
-		routes_list.append(route_temp)
+	return jsonify(result)
 
-	db.close()
-	result = { 
-		"Host" : "10.151.36.129"
-		"Flight_Rows" : data_numrows,
-		"Flight_Routes" : routes_list
-		}
-
+@app.route('/select_all_mysql')
+def select_all_mysql():	
+	result = select_all_routes_mysql()
 	return jsonify(result)
 
 @app.route("/select_all_hbase")
 def select_all_hbase():
-	database_url = 'http://localhost:8765/'
-	conn = phoenixdb.connect(database_url, autocommit=True)
-
-	cursor = conn.cursor()
-	a = cursor.execute("SELECT * FROM ROUTES2")
-	
-	routes_list = []
-	data = cursor.fetchall()
-	data_numrows = len(data)
-	print "[log] jumlah baris: ", len(data)
-	for row in data :
-		route_temp = {
-			'id_route': row[0],
-			'airline': row[1],
-			'id_airline': row[2],
-			'src_airport': row[3],
-			'id_src_airport': row[4],
-			'dst_airport': row[5],
-			'id_dst_airport': row[6],
-			'codeshare': row[7],
-			'stop_val': row[8],
-			'equipment': row[9],
-			'log_date': row[10]
-		}
-		routes_list.append(route_temp)
-
-	result = { 
-		"Flight_Rows" : data_numrows,
-		"Flight_Routes" : routes_list
-		}
-
+	result = select_all_routes_hbase()
 	return jsonify(result)
 
 @app.route("/")
 def hello():
-	return "Hello World!"
+	return "Tugas Akhir, Sync app"
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')

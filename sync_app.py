@@ -5,17 +5,17 @@ Script Python untuk melakukan sinkronisasi MySQL dan HBase
 import paramiko
 import string
 import webbrowser
-import time, os
-import re
+import time, os, re
 from datetime import datetime
 import MySQLdb
-import csv
-import sys
+import csv, sys
 import subprocess
 import conv_phoenix
+import c_db
 from ConfigParser import SafeConfigParser
 
 sync_time_init=0
+allow_q = ["insert", "delete", "update"]
 
 def getLastSync(data):
 	host = data['host']
@@ -59,7 +59,7 @@ def initiateDBtoHBase(data):
 	db.close()
 
 def getDataAfterLastSync(last_sync):
-	data = getConfMysqlDb()
+	data = c_db.getConfMysqlDb()
 	host = data['host']
 	username = data['username']
 	password = data['password']
@@ -157,52 +157,8 @@ def convertDateTimeFormat(input):
 	result = datetime.strptime(input, '%y%m%d %H:%M:%S')
 	return result
 
-def getConfMysqlDb():
-	parser = SafeConfigParser()
-	parser.read('configuration.ini')
-
-	conf_list = {
-		'host' : parser.get('mysql_db', 'host'),
-		'username' : parser.get('mysql_db', 'username'),
-		'password' : parser.get('mysql_db', 'password'),
-		'db_name' : parser.get('mysql_db', 'db_name')
-	}
-	return conf_list
-
-def getConfHbaseDb():
-	parser = SafeConfigParser()
-	parser.read('configuration.ini')
-
-	conf_list = {
-		'host' : parser.get('hbase_db', 'host')
-	}
-	return conf_list
-
-def getConfSyncLogDb():
-	parser = SafeConfigParser()
-	parser.read('configuration.ini')
-
-	conf_list = {
-		'host' : parser.get('sync_log_db', 'host'),
-		'username' : parser.get('sync_log_db', 'username'),
-		'password' : parser.get('sync_log_db', 'password'),
-		'db_name' : parser.get('sync_log_db', 'db_name')
-	}
-	return conf_list
-
-def getSshAccess():
-	parser = SafeConfigParser()
-	parser.read('configuration.ini')
-
-	conf_list = {
-		'host' : parser.get('ssh_access', 'host'),
-		'username' : parser.get('ssh_access', 'username'),
-		'password' : parser.get('ssh_access', 'password')
-	}
-	return conf_list
-
 def remoteServerMysqlDb():
-	data = getSshAccess()
+	data = c_db.getSshAccess()
 	host = data['host']
 	username = data['username']
 	password = data['password']
@@ -226,7 +182,7 @@ def initiateTransformMysqlToHbase(mysql_db, hbase_db, sync_db):
 		print "Data berhasil di export!"
 		print "Inisialisasi data awal.."
 		print "Mmentransformasi data ke HBase..."
-		create_tabel = "psql.py file/routes_create_2.sql" 
+		create_tabel = "psql.py file/flight_create_2.sql" 
 		phoenix_cmd = "psql.py -t ROUTES2 file/fetchallmysql.csv"
 
 		try :
@@ -244,13 +200,11 @@ def initiateTransformMysqlToHbase(mysql_db, hbase_db, sync_db):
 		except Exception as e:
 			print(e)
 
-allow_q = ["insert", "delete", "update"]
-
 if __name__ == '__main__':
-	data_mysql = getConfMysqlDb()
-	data_hbase = getConfHbaseDb()
-	data_sync_db = getConfSyncLogDb()
-	data_ssh = getSshAccess()
+	data_mysql = c_db.getConfMysqlDb()
+	data_hbase = c_db.getConfHbaseDb()
+	data_sync_db = c_db.getConfSyncLogDb()
+	data_ssh = c_db.getSshAccess()
 
 	ssh = paramiko.SSHClient()
 	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())	
@@ -354,7 +308,7 @@ if __name__ == '__main__':
 		print "Done"
 	if c==3 :
 		print "Key terlarang!"
-		getconf = getConfMysqlDb()
+		getconf = c_db.getConfMysqlDb()
 		print getconf	
 	else :
 		print "EXIT!";
