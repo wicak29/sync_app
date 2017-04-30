@@ -37,7 +37,8 @@ def getLastSync(data):
 		return 0		
 	db.close()
 
-def initiateDBtoHBase(data):
+def dumpMysqlTableToCsv(db_data, tabel_name):
+	data = db_data
 	host = data['host']
 	username = data['username']
 	password = data['password']
@@ -45,40 +46,33 @@ def initiateDBtoHBase(data):
 	# dump dari MySQL ke csv
 	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
 	cursor = db.cursor()
-	sql = "SELECT * FROM routes2"
+	sql = "SELECT * FROM {0}".format(tabel_name)
+	file_output = "file/csv/fetch_all_{0}.csv".format(tabel_name)
+
+	print "sql: ", sql
+	print "file_output: ", file_output
+
 	try :
 		cursor.execute(sql)
 		result = cursor.fetchall()
-		c = csv.writer(open("file/fetchallmysql.csv", "wb"))
+		c = csv.writer(open(file_output, "wb"))
 		for row in result:
 			c.writerow(row)
 		return 1
 	except :
 		print "Error, unable to fetch data from MySQL (",host,")"
 		return 0
-	db.close()
+	finally:
+		db.close()
 
-def getDataAfterLastSync(last_sync):
-	data = c_db.getConfMysqlDb()
-	host = data['host']
-	username = data['username']
-	password = data['password']
-	db_name = data['db_name']
-	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
-	cursor = db.cursor()
-	sql = "SELECT * FROM routes2 WHERE date_change > '{0}'".format(last_sync)
-
-	try :
-		cursor.execute(sql)
-		result = cursor.fetchall()
-		c = csv.writer(open("file/fetchnewtosync.csv", "wb"))
-		for row in result:
-			c.writerow(row)
-		return 1
-	except :
-		print "Error, unable to fetch data from MySQL (",host,")"
-		return 0
-	db.close()
+def initiateDBtoHBase(data_db):
+	get_table = c_db.getTableToSync()
+	list_table = get_table['table'].replace(" ", "").split(',')
+	for table in list_table:
+		d = dumpMysqlTableToCsv(data_db, table)
+		if (d) :
+			print "Berhasil, tabel ", table," berhasil di dump ke fetch_all_",table,".csv"
+	return list_table
 
 
 def insertNewSync(sync_db, mysql_db, hbase_db):
@@ -178,27 +172,38 @@ def mainGetFile() :
 def initiateTransformMysqlToHbase(mysql_db, hbase_db, sync_db):
 	print "Belum pernah sinkronisasi"
 	init = initiateDBtoHBase(mysql_db)
+
 	if (init) :
 		print "Data berhasil di export!"
 		print "Inisialisasi data awal.."
 		print "Mmentransformasi data ke HBase..."
 		create_tabel = "psql.py file/flight_create_2.sql" 
-		phoenix_cmd = "psql.py -t ROUTES2 file/fetchallmysql.csv"
 
 		try :
 			result_create_tabel = subprocess.check_output([create_tabel], shell=True)
 			if (result_create_tabel):
 				print "Tabel berhasil dibuat di HBase"
-				try : 
-					result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
-					if (result_phoenix):
-						update_status_sync = updateStatusSinkronisasi(sync_db, sync_time_init, 1)
-						if (update_status_sync) :
-							print 'Inisialisasi berhasil dilakukan...'
-				except Exception as e:
-					print(e)			
+				for table in init:
+					hbase_table = table.upper()
+					phoenix_cmd = "psql.py -t {0} file/csv/fetch_all_{1}.csv".format(hbase_table, table)
+
+					try : 
+						result_phoenix = subprocess.check_output([phoenix_cmd], shell=True)
+						if (result_phoenix):
+							print "Tabel {0} berhasil diimport ke HBase...".format(table)
+						else :
+							print "Tabel {0} gagal diimport ke HBase..".format(table)
+					except Exception as e:
+						print(e)
+			else:
+				print "Gagal membuat tabel di HBase.. "			
+				
 		except Exception as e:
 			print(e)
+
+	update_status_sync = updateStatusSinkronisasi(sync_db, sync_time_init, 1)
+	if (update_status_sync) :
+		print 'Proses inisialisasi selesai..'
 
 if __name__ == '__main__':
 	data_mysql = c_db.getConfMysqlDb()

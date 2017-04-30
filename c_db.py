@@ -1,6 +1,12 @@
 import MySQLdb
 from ConfigParser import SafeConfigParser
 
+FILE_CONF = 'configuration.ini'
+
+def getFileConf():
+	parser = SafeConfigParser()
+	return parser.read(FILE_CONF)
+
 def getConfMysqlDb():
 	parser = SafeConfigParser()
 	parser.read('configuration.ini')
@@ -42,5 +48,14 @@ def getSshAccess():
 		'host' : parser.get('ssh_access', 'host'),
 		'username' : parser.get('ssh_access', 'username'),
 		'password' : parser.get('ssh_access', 'password')
+	}
+	return conf_list
+
+def getTableToSync():
+	parser = SafeConfigParser()
+	parser.read('configuration.ini')
+
+	conf_list = {
+		'table' : parser.get('mysql_table', 'table')
 	}
 	return conf_list
