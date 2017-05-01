@@ -1,8 +1,9 @@
 import MySQLdb
 import phoenixdb
 from flask import Flask, request
-from flask import jsonify
+from flask import jsonify, Response
 import mysql_kueri
+import json 
 import c_db
 from ConfigParser import SafeConfigParser
 
@@ -271,8 +272,6 @@ def select_all_routes():
 		get_from = 1
 		db_data = data_mysql
 
-	print db_data
-
 	routes_list = []
 	data = query_db("SELECT * FROM routes2",[],False,get_from)
 	data_numrows = len(data)
@@ -301,24 +300,93 @@ def select_all_routes():
 
 	return jsonify(result)
 
-@app.route('/select_all_airport')
-def select_all_airport():
-	print "[log] Select all from table airport"
-
+@app.route('/select_all_airline')
+def select_all_airline():
+	print "[log] Select all from table route"
 	# Cek status Sinkronisasi
-	db = connect_db_mysql(data_sync_db)
-	cursor = db.cursor()
-
 	last = getLastSync(data_sync_db)
-	# print last
+	
+	# 1 : MySQL
+	# 0 : HBase
 	if (last[4]==1):
 		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
-		result = select_all_routes_mysql()
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
 	else:
 		print "Proses sinkronisasi sedang BERLANGSUNG"
-		result = select_all_routes_hbase()
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	airline_list = []
+	data = query_db("SELECT * FROM airline2",[],False,get_from)
+	data_numrows = len(data)
+	for row in data :
+		airline = {
+			'id_airline' : row[0],
+			'name' : row[1],
+			'alias' : row[2],
+			'iata' : row[3],
+			'icao' : row[4],
+			'callsign' : row[5],
+			'country' : row[6],
+			'active_stat' : row[7]
+		}
+		airline_list.append(airline)
+
+	result = { 
+		"Host" : db_data['host'],
+		"Database" : db_data['name'],
+		"Flight_Rows" : data_numrows,
+		"Flight_Routes" : airline_list
+		}
+
+	return Response(json.dumps(result, encoding='latin1'), mimetype='application/json')
+
+@app.route('/select_airline/<id_airline>')
+def select_airline(id_airline):
+	print "[log] Select airline by airline's ID"
+	# Cek status Sinkronisasi
+	# id_airline = int(id_airline)
+	print id_airline
+
+	last = getLastSync(data_sync_db)
+	
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	airline = []
+	kueri = "SELECT * FROM airline2 WHERE id_airline = {0}".format(id_airline)
+	data = query_db(kueri,[],True,get_from)
+	
+	airport = {
+		'id_airline' : data[0],
+		'name' : data[1],
+		'alias' : data[2],
+		'iata' : data[3],
+		'icao' : data[4],
+		'callsign' : data[5],
+		'country' : data[6],
+		'active_stat' : data[7]
+	}
+
+	result = { 
+		"host" : db_data['host'],
+		"database" : db_data['name'],
+		"airport" : airport
+	}
 
 	return jsonify(result)
+	# return Response(json.dumps(data, encoding='latin1'), mimetype='application/json')
 
 @app.route('/select_all_mysql')
 def select_all_mysql():	
@@ -336,3 +404,4 @@ def hello():
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')
+	app.config['JSON_AS_ASCII'] = False
