@@ -12,6 +12,7 @@ def getConfMysqlDb():
 	parser.read('configuration.ini')
 
 	conf_list = {
+		'name' : parser.get('mysql_db', 'name'),
 		'host' : parser.get('mysql_db', 'host'),
 		'username' : parser.get('mysql_db', 'username'),
 		'password' : parser.get('mysql_db', 'password'),
@@ -24,6 +25,7 @@ def getConfHbaseDb():
 	parser.read('configuration.ini')
 
 	conf_list = {
+		'name' : parser.get('hbase_db', 'name'),
 		'host' : parser.get('hbase_db', 'host')
 	}
 	return conf_list
@@ -33,6 +35,7 @@ def getConfSyncLogDb():
 	parser.read('configuration.ini')
 
 	conf_list = {
+		'name' : parser.get('sync_log_db', 'name'),
 		'host' : parser.get('sync_log_db', 'host'),
 		'username' : parser.get('sync_log_db', 'username'),
 		'password' : parser.get('sync_log_db', 'password'),

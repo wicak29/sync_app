@@ -7,6 +7,17 @@ OUTPUT :to_str = "UPSERT INTO routes (id_route, src_airport, id_src_airport) SEL
 '''
 
 import re
+from ConfigParser import SafeConfigParser
+
+def getPrimaryKey():
+	parser = SafeConfigParser()
+	parser.read('configuration.ini')
+
+	conf_list = {
+		'table' : parser.get('mysql_table', 'table'),
+		'primary_key' : parser.get('mysql_table', 'primary_key')
+	}
+	return conf_list
 
 def update_to_upsert(val) :
 	update_str = val
@@ -15,14 +26,27 @@ def update_to_upsert(val) :
 	# Get table name
 	tabel = update_split[1]
 
-	kolom = [None]*10
-	value = [None]*10
+	kolom = [None]*50
+	value = [None]*50
+
+	# Get nama table
+	table_name = re.findall(r'UPDATE(.*?)SET', update_str)[0].replace(" ", "")
+	print "nama tabel: ", table_name
+
+	# Mencari Primary Key Table
+	get_list_tabel = getPrimaryKey()
+	list_table = get_list_tabel['table'].split(',')
+	list_pk = get_list_tabel['primary_key'].split(',')
+	if (table_name in list_table):
+		pos = list_table.index(table_name)
+		pk = list_pk[pos]
+		print "PK: ", pk
 
 	# get kolom and value betwen SET and WHERE
 	fields = re.findall(r'SET(.*?)WHERE', update_str)
 	kol_val = fields[0].split(',')
-	list_kolom = "(id_route,"
-	list_value = " SELECT id_route,"
+	list_kolom = "({0},".format(pk)
+	list_value = " SELECT {0},".format(pk)
 	for i in range(len(kol_val)):
 		tmp = kol_val[i]
 		tmp_rmv_space = tmp.replace(" ","")
@@ -41,9 +65,9 @@ def update_to_upsert(val) :
 	last_pos = len(kol_val)
 	split_where = update_str.split('WHERE')[1]
 
-	final_string = "UPSERT INTO routes2 " + list_kolom + list_value + " FROM routes2 WHERE " + split_where + ";\n"
+	final_string = "UPSERT INTO {0} {1} {2} FROM {0} WHERE {3};\n".format(table_name, list_kolom, list_value, split_where)
 	return final_string
 
-# x = "update routes2 set codeshare='Y' WHERE id_route=1"
+# x = "UPDATE airline2 SET iata='PR', callsign='PRIVATE', country='Unknown' WHERE id_airline=1"
 # result = update_to_upsert(x)
 # print result

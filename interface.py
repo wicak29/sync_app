@@ -22,6 +22,12 @@ def connect_db_mysql(data):
 	db = MySQLdb.connect(host=host, user=username, passwd=password, db=db_name)
 	return db
 
+def connect_db_hbase(data):
+	database_url = 'http://localhost:8765/'
+	conn = phoenixdb.connect(database_url, autocommit=True)
+
+	return conn
+
 # Insert pasti dilakukan di MySQL database
 def insert_into(table, data):
 	db = connect_db_mysql(data_mysql)
@@ -53,16 +59,24 @@ def hapus_rute(table, data):
 	else:
 		return 0
 
-def select_all_routes_mysql():
-	db = connect_db_mysql(data_mysql)
+def query_db(query, args=(), one=False, db=0):
+	# 1 : MySQL
+	# 0 : HBase
+	if (db==1):
+		db = connect_db_mysql(data_mysql)
+	else :
+		db = connect_db_hbase(data_hbase)
+
 	cursor = db.cursor()
+	cursor.execute(query, args)
+	result = cursor.fetchall()
+	db.close
+	return (result[0] if result else None) if one else result
 
-	query_string = "SELECT * FROM routes2"
-	cursor.execute(query_string)
-
+def select_all_routes_mysql():
 	routes_list = []
-	data = cursor.fetchall()
-	data_numrows = int(cursor.rowcount)
+	data = query_db("SELECT * FROM routes2",'',False,0)
+	data_numrows = len(data)
 	for row in data :
 		route_temp = {
 			'id_route': row[0],
@@ -79,7 +93,6 @@ def select_all_routes_mysql():
 		}
 		routes_list.append(route_temp)
 
-	db.close()
 	result = { 
 		"Host" : "10.151.36.129",
 		"Database" : "MySQL",
@@ -93,12 +106,11 @@ def select_all_routes_hbase():
 	conn = phoenixdb.connect(database_url, autocommit=True)
 
 	cursor = conn.cursor()
-	a = cursor.execute("SELECT * FROM ROUTES2")
+	cursor.execute("SELECT * FROM ROUTES2")
 	
 	routes_list = []
 	data = cursor.fetchall()
 	data_numrows = len(data)
-	print "[log] jumlah baris: ", len(data)
 	for row in data :
 		route_temp = {
 			'id_route': row[0],
@@ -243,6 +255,56 @@ def delete_routes_by_id():
 @app.route('/select_all_routes')
 def select_all_routes():
 	print "[log] Select all from table route"
+	# Cek status Sinkronisasi
+	last = getLastSync(data_sync_db)
+	
+	# 1 : MySQL
+	# 0 : HBase
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	print db_data
+
+	routes_list = []
+	data = query_db("SELECT * FROM routes2",[],False,get_from)
+	data_numrows = len(data)
+	for row in data :
+		route_temp = {
+			'id_route': row[0],
+			'airline': row[1],
+			'id_airline': row[2],
+			'src_airport': row[3],
+			'id_src_airport': row[4],
+			'dst_airport': row[5],
+			'id_dst_airport': row[6],
+			'codeshare': row[7],
+			'stop_val': row[8],
+			'equipment': row[9],
+			'log_date': row[10]
+		}
+		routes_list.append(route_temp)
+
+	result = { 
+		"Host" : db_data['host'],
+		"Database" : db_data['name'],
+		"Flight_Rows" : data_numrows,
+		"Flight_Routes" : routes_list
+		}
+
+	return jsonify(result)
+
+@app.route('/select_all_airport')
+def select_all_airport():
+	print "[log] Select all from table airport"
+
 	# Cek status Sinkronisasi
 	db = connect_db_mysql(data_sync_db)
 	cursor = db.cursor()
