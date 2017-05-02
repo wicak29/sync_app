@@ -3,7 +3,7 @@ import phoenixdb
 from flask import Flask, request
 from flask import jsonify, Response
 import mysql_kueri
-import json 
+import json, urllib2
 import c_db
 from ConfigParser import SafeConfigParser
 
@@ -24,7 +24,7 @@ def connect_db_mysql(data):
 	return db
 
 def connect_db_hbase(data):
-	database_url = 'http://10.151.36.29:8765/'
+	database_url = 'http://{}:8765/'.format(data_hbase['host'])
 	conn = phoenixdb.connect(database_url, autocommit=True)
 
 	return conn
@@ -397,6 +397,13 @@ def select_all_mysql():
 def select_all_hbase():
 	result = select_all_routes_hbase()
 	return jsonify(result)
+
+@app.route("/sinkron")
+def sinkron():
+	response = urllib2.urlopen('http://10.151.36.29:5001')
+	data = json.load(response)   
+	print data
+	return jsonify(data)
 
 @app.route("/")
 def hello():
