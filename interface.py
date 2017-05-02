@@ -24,7 +24,7 @@ def connect_db_mysql(data):
 	return db
 
 def connect_db_hbase(data):
-	database_url = 'http://localhost:8765/'
+	database_url = 'http://10.151.36.29:8765/'
 	conn = phoenixdb.connect(database_url, autocommit=True)
 
 	return conn
