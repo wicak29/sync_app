@@ -14,7 +14,10 @@ UPDATE routes2 SET codeshare='Y', stop_val=1 WHERE id_route=104;
 Table Airline :
 -------------------------------------------------------
 UPDATE airline2 SET iata='PR', callsign='PRIVATE', country='Unknown' WHERE id_airline=1;
+INSERT INTO airline2 (id_airline, name, alias, iata, icao, callsign, country, active_stat) VALUES (21318,'Garuda Indonesia','\N','GA','GIA','INDONESIA','Indonesia','Y');
 
 
-Table Airport :
+Table Airport : select * from airport2 order by airport_id desc;
+--------------------------------------------------------
 UPDATE airport2 SET timezone='9', dst='A' WHERE airport_id=1;
+INSERT INTO airport2 (airport_Id, name_airport, city, country, iata, icao, latitude, longitude, altitude, timezone, dst, tz_db, type_airport, source) VALUES (12059,'Goroka Airport','Goroka','Papua New Guinea','GKA','AYGA','-6.081689834590001','145.391998291','5282','10','U','Pacific/Port_Moresby','airport','OurAirports');
