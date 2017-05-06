@@ -215,9 +215,27 @@ if __name__ == '__main__':
 	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())	
 	ssh.connect(data_ssh['host'], username=data_ssh['username'], password=data_ssh['password'])
 	
-	print "1: get file log"
-	print "2: Syncronize MySQL to HBase"
-	c = input('Select an option :')
+	# print "1: get file log"
+	# print "2: Syncronize MySQL to HBase"
+	# c = input('Select an option :')
+	
+	try : 
+		act = int(sys.argv[1])
+
+		if (act==1):
+			c = 1
+		elif (act==2):
+			c = 2
+		else :
+			c = -1
+			print "Parameter salah ..."
+			print ">> 1: get file log"
+			print ">> 2: Syncronize MySQL to HBase"
+	except :
+		print "Sintaks salah!"
+		c = -1
+
+
 
 	if c==1 :
 		mainGetFile()
