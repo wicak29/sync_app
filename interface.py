@@ -71,8 +71,26 @@ def query_db(query, args=(), one=False, db=0):
 	cursor = db.cursor()
 	cursor.execute(query, args)
 	result = cursor.fetchall()
-	db.close
+	db.close()
 	return (result[0] if result else None) if one else result
+
+def query_db_insert_update(query, db=0):
+	# 1 : MySQL
+	# 0 : HBase
+	if (db==1):
+		db = connect_db_mysql(data_mysql)
+	else :
+		db = connect_db_hbase(data_hbase)
+
+	cursor = db.cursor()
+	result = cursor.execute(query)
+	db.commit()
+	db.close()
+
+	if result:
+		return 1
+	else :
+		return 0
 
 def select_all_routes_mysql():
 	routes_list = []
@@ -229,6 +247,9 @@ def insert_routes():
 
 @app.route("/delete_routes_by_id", methods=['POST'])
 def delete_routes_by_id():
+	do_delete = ''
+	msg = ''
+
 	if request.method == 'POST':
 		id_route = request.form['id_route']
 		data = { 'name': 'id_route',
@@ -245,14 +266,13 @@ def delete_routes_by_id():
 		except Exception, e:
 				print str(e)
 
-		result = {
-			"Status" : do_delete,
-			"Message" : msg
-		}
+	result = {
+		"Status" : do_delete,
+		"Message" : msg
+	}
 
-		return jsonify(result)
+	return jsonify(result)
 
-# Melakukan SELECT ALL pada tabel ROUTES
 @app.route('/select_all_routes')
 def select_all_routes():
 	print "[log] Select all from table route"
@@ -364,11 +384,10 @@ def select_airline(id_airline):
 		get_from = 1
 		db_data = data_mysql
 
-	airline = []
 	kueri = "SELECT * FROM airline2 WHERE id_airline = {0}".format(id_airline)
 	data = query_db(kueri,[],True,get_from)
 	
-	airport = {
+	airline = {
 		'id_airline' : data[0],
 		'name' : data[1],
 		'alias' : data[2],
@@ -382,12 +401,60 @@ def select_airline(id_airline):
 	result = { 
 		"host" : db_data['host'],
 		"database" : db_data['name'],
-		"airport" : airport
+		"airline" : airline
 	}
 
 	return jsonify(result)
 	# return Response(json.dumps(data, encoding='latin1'), mimetype='application/json')
 
+@app.route('/update_airline_by_id', methods=['POST'])
+def update_airline():
+	print "[log] UPDATE airline data by airline's ID"
+	# Cek status Sinkronisasi
+
+	if request.method == 'POST':
+		id_airline = request.form['id_airline']
+		name = request.form['name']
+		alias = request.form['alias']
+		iata = request.form['iata']
+		icao = request.form['icao']
+		callsign = request.form['callsign']
+		country = request.form['country']
+		active_stat = request.form['active_stat']
+		
+		kueri = ("UPDATE airline2 "
+			"SET name='{0}', "
+			"alias='{1}', "
+			"iata='{2}', "
+			"icao='{3}', "
+			"callsign='{4}', "
+			"country='{5}', "
+			"active_stat='{6}' "
+			"WHERE id_airline={7}").format(name, alias, iata, icao, callsign, country, active_stat, id_airline)
+
+		# pasti 1 karen aksi dilakukan ke db MySQL
+		do_update = query_db_insert_update(kueri,1)
+
+		if do_update :
+			msg = 'Successed to UPDATE'
+		else :
+			msg = "Failed to UPDATE"
+
+		result = {
+			"Status" : do_update,
+			"Message" : msg
+		}
+
+	return jsonify(result)
+
+@app.route("/sinkron")
+def sinkron():
+	response = urllib2.urlopen('http://10.151.36.29:5001')
+	data = json.load(response)   
+	print data
+	return jsonify(data['status'])
+
+# ------------------------------------------------------------------------------------- #
 @app.route('/select_all_mysql')
 def select_all_mysql():	
 	result = select_all_routes_mysql()
@@ -398,16 +465,11 @@ def select_all_hbase():
 	result = select_all_routes_hbase()
 	return jsonify(result)
 
-@app.route("/sinkron")
-def sinkron():
-	response = urllib2.urlopen('http://10.151.36.29:5001')
-	data = json.load(response)   
-	print data
-	return jsonify(data)
-
 @app.route("/")
 def hello():
 	return "Tugas Akhir, Sync app"
+
+# ------------------------------------------------------------------------------------- #
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0')
