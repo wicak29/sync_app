@@ -904,7 +904,7 @@ def sinkron():
 	print "[log] Melakukan sinkronisasi .."
 	data = json.load(response)   
 	# print data
-	return jsonify(database)
+	return jsonify(data)
 
 # ------------------------------------------------------------------------------------- #
 @app.route('/select_all_mysql')
