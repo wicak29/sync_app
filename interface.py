@@ -172,6 +172,7 @@ def getLastSync(data):
 		print "Error, unable to fetch Last Sync data"
 		return 0		
 
+# ROUTES ---------------------------------------------------------------------------------------
 @app.route('/insert_routes', methods=['POST'])
 def insert_routes():
 	if request.method == 'POST' :
@@ -314,9 +315,187 @@ def select_all_routes():
 	result = { 
 		"Host" : db_data['host'],
 		"Database" : db_data['name'],
-		"Flight_Rows" : data_numrows,
+		"Rows" : data_numrows,
 		"Flight_Routes" : routes_list
 		}
+
+	return jsonify(result)
+
+@app.route('/select_route_by_id/<id_route>')
+def select_route_by_id(id_route):
+	print "[log] Select route by route's ID"	
+
+	last = getLastSync(data_sync_db)
+	
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	kueri = "SELECT * FROM routes2 WHERE id_route = {0}".format(id_route)
+	data = query_db(kueri,[],True,get_from)
+	
+	if (data==None) :
+		route = "No data selected"
+	else:
+		route = {
+			'id_route' : data[0],
+			'airline' : data[1],
+			'id_airline' : data[2],
+			'src_airport' : data[3],
+			'id_src_airport' : data[4],
+			'dst_airport' : data[5],
+			'id_dst_airport' : data[6],
+			'codeshare' : data[7],
+			'stop_val' : data[8],
+			'equipment' : data[9],
+			'log_date' : data[10]
+		}
+
+	result = { 
+		"host" : db_data['host'],
+		"database" : db_data['name'],
+		"route" : route
+	}
+
+	return jsonify(result)
+	# return Response(json.dumps(data, encoding='latin1'), mimetype='application/json')
+
+@app.route('/update_route_by_id', methods=['POST'])
+def update_route_by_id():
+	print "[log] UPDATE ROUTES data by routes's ID"
+	# Cek status Sinkronisasi
+
+	if request.method == 'POST':
+		id_route = request.form['id_route']
+		airline = request.form['airline']
+		id_airline = request.form['id_airline']
+		src_airport = request.form['src_airport']
+		id_src_airport = request.form['id_src_airport']
+		dst_airport = request.form['dst_airport']
+		id_dst_airport = request.form['id_dst_airport']
+		codeshare = request.form['codeshare']
+		stop_val = request.form['stop_val']
+		equipment = request.form['equipment']
+		log_date = request.form['log_date']
+		
+		kueri = ("UPDATE routes2 "
+			"SET airline='{0}', "
+			"id_airline='{1}', "
+			"src_airport='{2}', "
+			"id_src_airport='{3}', "
+			"dst_airport='{4}', "
+			"id_dst_airport='{5}', "
+			"codeshare='{6}', "
+			"stop_val={7}, "
+			"equipment='{8}', "
+			"log_date='{9}' "
+			"WHERE id_route={10}").format(airline, id_airline, src_airport, id_src_airport, dst_airport, id_dst_airport, codeshare, stop_val, equipment, log_date, id_route)
+
+		print kueri
+		do_update = query_db_insert_update(kueri,1)
+
+		if do_update :
+			msg = 'Successed to UPDATE table routes'
+		else :
+			msg = "Failed to UPDATE table routes"
+
+		result = {
+			"Status" : do_update,
+			"Message" : msg
+		}
+
+	return jsonify(result)
+
+# AIRLINE ---------------------------------------------------------------------------------------
+@app.route('/insert_airline', methods=['POST'])
+def insert_airline():
+	if request.method == 'POST' :
+		data = [ {
+				'nama': 'id_airline',
+				'type': 'int',
+				'value': request.form['id_airline']
+			},
+			{
+				'nama': 'name',
+				'type': 'varchar',
+				'value': request.form['name']
+			},
+			{
+				'nama': 'alias',
+				'type': 'varchar',
+				'value': request.form['alias']
+			},
+			{
+				'nama': 'iata',
+				'type': 'varchar',
+				'value': request.form['iata']
+			},
+			{
+				'nama': 'icao',
+				'type': 'varchar',
+				'value': request.form['icao']
+			},
+			{
+				'nama': 'callsign',
+				'type': 'varchar',
+				'value': request.form['callsign']
+			},
+			{
+				'nama': 'country',
+				'type': 'varchar',
+				'value': request.form['country']
+			},
+			{
+				'nama': 'active_stat',
+				'type': 'varchar',
+				'value': request.form['active_stat']
+			}
+		]
+
+		do_insert = insert_into('airline2', data)
+		if do_insert :
+			msg = 'Successed INSERT to airline2'
+		else :
+			msg = "Failed INSERT to airline2"
+
+		result = {
+			"Status" : do_insert,
+			"Message" : msg
+		}
+
+		return jsonify(result)
+
+@app.route("/delete_airline_by_id", methods=['POST'])
+def delete_airline_by_id():
+	do_delete = ''
+	msg = ''
+
+	if request.method == 'POST':
+		data = { 'name': 'id_airline',
+			'type' : 'int',
+			'value' : request.form['id_airline']
+		}
+
+		try :
+			do_delete = hapus_rute('airline2', data)
+			if do_delete :
+				msg = "Successed to DELETE"
+			else:
+				msg = "Failed to DELETE"
+		except Exception, e:
+				print str(e)
+
+	result = {
+		"Status" : do_delete,
+		"Message" : msg
+	}
 
 	return jsonify(result)
 
@@ -358,8 +537,8 @@ def select_all_airline():
 	result = { 
 		"Host" : db_data['host'],
 		"Database" : db_data['name'],
-		"Flight_Rows" : data_numrows,
-		"Flight_Routes" : airline_list
+		"Rows" : data_numrows,
+		"Airlines" : airline_list
 		}
 
 	return Response(json.dumps(result, encoding='latin1'), mimetype='application/json')
@@ -386,17 +565,20 @@ def select_airline(id_airline):
 
 	kueri = "SELECT * FROM airline2 WHERE id_airline = {0}".format(id_airline)
 	data = query_db(kueri,[],True,get_from)
-	
-	airline = {
-		'id_airline' : data[0],
-		'name' : data[1],
-		'alias' : data[2],
-		'iata' : data[3],
-		'icao' : data[4],
-		'callsign' : data[5],
-		'country' : data[6],
-		'active_stat' : data[7]
-	}
+
+	if (data==None) : 
+		airline = "No data selected"
+	else :
+		airline = {
+			'id_airline' : data[0],
+			'name' : data[1],
+			'alias' : data[2],
+			'iata' : data[3],
+			'icao' : data[4],
+			'callsign' : data[5],
+			'country' : data[6],
+			'active_stat' : data[7]
+		}
 
 	result = { 
 		"host" : db_data['host'],
@@ -436,9 +618,9 @@ def update_airline():
 		do_update = query_db_insert_update(kueri,1)
 
 		if do_update :
-			msg = 'Successed to UPDATE'
+			msg = 'Successed to UPDATE table airline'
 		else :
-			msg = "Failed to UPDATE"
+			msg = "Failed to UPDATE table airline"
 
 		result = {
 			"Status" : do_update,
@@ -447,12 +629,282 @@ def update_airline():
 
 	return jsonify(result)
 
+# AIRLINE ---------------------------------------------------------------------------------------
+@app.route('/insert_airport', methods=['POST'])
+def insert_airport():
+	if request.method == 'POST' :
+		data = [ {
+				'nama': 'airport_id',
+				'type': 'int',
+				'value': request.form['airport_id']
+			},
+			{
+				'nama': 'name_airport',
+				'type': 'varchar',
+				'value': request.form['name_airport']
+			},
+			{
+				'nama': 'city',
+				'type': 'varchar',
+				'value': request.form['city']
+			},
+			{
+				'nama': 'country',
+				'type': 'varchar',
+				'value': request.form['country']
+			},
+			{
+				'nama': 'iata',
+				'type': 'varchar',
+				'value': request.form['iata']
+			},
+			{
+				'nama': 'icao',
+				'type': 'varchar',
+				'value': request.form['icao']
+			},
+			{
+				'nama': 'latitude',
+				'type': 'varchar',
+				'value': request.form['latitude']
+			},
+			{
+				'nama': 'longitude',
+				'type': 'varchar',
+				'value': request.form['longitude']
+			},
+			{
+				'nama': 'altitude',
+				'type': 'varchar',
+				'value': request.form['altitude']
+			},
+			{
+				'nama': 'timezone',
+				'type': 'varchar',
+				'value': request.form['timezone']
+			},
+			{
+				'nama': 'dst',
+				'type': 'varchar',
+				'value': request.form['dst']
+			},
+			{
+				'nama': 'tz_db',
+				'type': 'varchar',
+				'value': request.form['tz_db']
+			},
+			{
+				'nama': 'type_airport',
+				'type': 'varchar',
+				'value': request.form['type_airport']
+			},
+			{
+				'nama': 'source',
+				'type': 'varchar',
+				'value': request.form['source']
+			}
+		]
+
+		do_insert = insert_into('airport2', data)
+		if do_insert :
+			msg = 'Successed INSERT to airport2'
+		else :
+			msg = "Failed INSERT to airport2"
+
+		result = {
+			"Status" : do_insert,
+			"Message" : msg
+		}
+
+		return jsonify(result)
+
+@app.route("/delete_airport_by_id", methods=['POST'])
+def delete_airport_by_id():
+	do_delete = ''
+	msg = ''
+
+	if request.method == 'POST':
+		data = { 'name': 'airport_id',
+			'type' : 'int',
+			'value' : request.form['airport_id']
+		}
+
+		try :
+			do_delete = hapus_rute('airport2', data)
+			if do_delete :
+				msg = "Successed to DELETE"
+			else:
+				msg = "Failed to DELETE"
+		except Exception, e:
+				print str(e)
+
+	result = {
+		"Status" : do_delete,
+		"Message" : msg
+	}
+
+	return jsonify(result)
+
+@app.route('/select_all_airport')
+def select_all_airport():
+	print "[log] Select all from table airport"
+	# Cek status Sinkronisasi
+	last = getLastSync(data_sync_db)
+	
+	# 1 : MySQL
+	# 0 : HBase
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	airport_list = []
+	data = query_db("SELECT * FROM airport2",[],False,get_from)
+	data_numrows = len(data)
+	for row in data :
+		airport = {
+			'airport_id' : row[0],
+			'name_airport' : row[1],
+			'city' : row[2],
+			'country' : row[3],
+			'iata' : row[4],
+			'icao' : row[5],
+			'latitude' : row[6],
+			'longitude' : row[7],
+			'altitude' : row[8],
+			'timezone': row[9],
+			'dst' : row[10],
+			'tz_db' : row[11],
+			'type_airport' : row[12],
+			'source' : row[13]
+		}
+		airport_list.append(airport)
+
+	result = { 
+		"Host" : db_data['host'],
+		"Database" : db_data['name'],
+		"Rows" : data_numrows,
+		"Airport" : airport_list
+		}
+
+	return Response(json.dumps(result, encoding='latin1'), mimetype='application/json')
+
+@app.route('/select_airport/<airport_id>')
+def select_airport(airport_id):
+	print "[log] Select airport by airport's ID"
+
+	last = getLastSync(data_sync_db)
+	
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	kueri = "SELECT * FROM airport2 WHERE airport_id = {0}".format(airport_id)
+	data = query_db(kueri,[],True,get_from)
+
+	if (data==None) : 
+		airport = "No data selected"
+	else :
+		airport = {
+			'airport_id' : data[0],
+			'name_airport' : data[1],
+			'city' : data[2],
+			'country' : data[3],
+			'iata' : data[4],
+			'icao' : data[5],
+			'latitude' : data[6],
+			'longitude' : data[7],
+			'altitude' : data[8],
+			'timezone': data[9],
+			'dst' : data[10],
+			'tz_db' : data[11],
+			'type_airport' : data[12],
+			'source' : data[13]
+		}
+
+	result = { 
+		"host" : db_data['host'],
+		"database" : db_data['name'],
+		"airline" : airport
+	}
+
+	return jsonify(result)
+	# return Response(json.dumps(data, encoding='latin1'), mimetype='application/json')
+
+@app.route('/update_airport', methods=['POST'])
+def update_airport():
+	print "[log] UPDATE airport data by airport's ID"
+	# Cek status Sinkronisasi
+
+	if request.method == 'POST':
+		airport_id = request.form['airport_id']
+		name_airport = request.form['name_airport']
+		city = request.form['city']
+		country = request.form['country']
+		iata = request.form['iata']
+		icao = request.form['icao']
+		latitude = request.form['latitude']
+		longitude = request.form['longitude']
+		altitude = request.form['altitude']
+		timezone = request.form['timezone']
+		dst = request.form['dst']
+		tz_db = request.form['tz_db']
+		type_airport = request.form['type_airport']
+		source =  request.form['source']
+		
+		kueri = ("UPDATE airport2 "
+			"SET name_airport='{0}', "
+			"city='{1}', "
+			"country='{2}', "
+			"iata='{3}', "
+			"icao='{4}', "
+			"latitude='{5}', "
+			"longitude='{6}', "
+			"altitude='{7}', "
+			"timezone='{8}', "
+			"dst='{9}', "
+			"tz_db='{10}', "
+			"type_airport='{11}', "
+			"source='{12}' "
+			"WHERE airport_id={13}").format(name_airport, city, country, iata, icao, latitude, longitude, altitude, timezone, dst, tz_db, type_airport, source, airport_id)
+
+		# pasti 1 karen aksi dilakukan ke db MySQL
+		print kueri
+		do_update = query_db_insert_update(kueri,1)
+
+		if do_update :
+			msg = 'Successed to UPDATE table airport'
+		else :
+			msg = "Failed to UPDATE table airport"
+
+		result = {
+			"Status" : do_update,
+			"Message" : msg
+		}
+
+	return jsonify(result)
+
+# SINKRONISASI ----------------------------------------------------------------------------------
 @app.route("/sinkron")
 def sinkron():
 	response = urllib2.urlopen('http://10.151.36.29:5001')
+	print "[log] Melakukan sinkronisasi .."
 	data = json.load(response)   
-	print data
-	return jsonify(data['status'])
+	# print data
+	return jsonify(database)
 
 # ------------------------------------------------------------------------------------- #
 @app.route('/select_all_mysql')
