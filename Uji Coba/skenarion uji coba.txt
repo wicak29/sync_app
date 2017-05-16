@@ -9,3 +9,15 @@ Skenario Uji Coba :
 Jumlah Tabel : 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 Jumlah Row : 50, 100, 1000, 10000, 100000, 500000
 Inisialisasi : Jumlah row table
+
+Bab 4 : 
+- 4.1 	Lingkungan Implementasi
+- 4.2 	Rincian Implementasi System Data Adapter
+		- Instalasi Paket 
+		- Implementasi DB Adapter
+		- Implementasi DB Converter
+- 4.3 	Rincian Implementasi Server Basis Data
+		- Instalasi Server SQL
+		- Instalasi Server NoSQL
+
+Bab 5 : 
