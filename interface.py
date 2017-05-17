@@ -5,6 +5,7 @@ from flask import jsonify, Response
 import mysql_kueri
 import json, urllib2
 import c_db
+import time
 from ConfigParser import SafeConfigParser
 
 app = Flask(__name__)
@@ -175,6 +176,7 @@ def getLastSync(data):
 # ROUTES ---------------------------------------------------------------------------------------
 @app.route('/insert_routes', methods=['POST'])
 def insert_routes():
+	start_time = time.time()
 	if request.method == 'POST' :
 		data = [ {
 				'nama': 'id_route',
@@ -239,6 +241,8 @@ def insert_routes():
 		else :
 			msg = "Failed to INSERT"
 
+		duration = time.time() - start_time
+		print "Durasi waktu : ", duration
 		result = {
 			"Status" : do_insert,
 			"Message" : msg
@@ -248,6 +252,7 @@ def insert_routes():
 
 @app.route("/delete_routes_by_id", methods=['POST'])
 def delete_routes_by_id():
+	start_time = time.time()
 	do_delete = ''
 	msg = ''
 
@@ -266,6 +271,9 @@ def delete_routes_by_id():
 				msg = "Failed to DELETE"
 		except Exception, e:
 				print str(e)
+	
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
 
 	result = {
 		"Status" : do_delete,
@@ -276,6 +284,7 @@ def delete_routes_by_id():
 
 @app.route('/select_all_routes')
 def select_all_routes():
+	start_time = time.time()
 	print "[log] Select all from table route"
 	# Cek status Sinkronisasi
 	last = getLastSync(data_sync_db)
@@ -312,6 +321,9 @@ def select_all_routes():
 		}
 		routes_list.append(route_temp)
 
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
 	result = { 
 		"Host" : db_data['host'],
 		"Database" : db_data['name'],
@@ -323,6 +335,7 @@ def select_all_routes():
 
 @app.route('/select_route_by_id/<id_route>')
 def select_route_by_id(id_route):
+	start_time = time.time()
 	print "[log] Select route by route's ID"	
 
 	last = getLastSync(data_sync_db)
@@ -358,6 +371,9 @@ def select_route_by_id(id_route):
 			'log_date' : data[10]
 		}
 
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
 	result = { 
 		"host" : db_data['host'],
 		"database" : db_data['name'],
@@ -369,6 +385,7 @@ def select_route_by_id(id_route):
 
 @app.route('/update_route_by_id', methods=['POST'])
 def update_route_by_id():
+	start_time = time.time()
 	print "[log] UPDATE ROUTES data by routes's ID"
 	# Cek status Sinkronisasi
 
@@ -406,6 +423,9 @@ def update_route_by_id():
 		else :
 			msg = "Failed to UPDATE table routes"
 
+		duration = time.time() - start_time
+		print "Durasi waktu : ", duration
+
 		result = {
 			"Status" : do_update,
 			"Message" : msg
@@ -416,6 +436,7 @@ def update_route_by_id():
 # AIRLINE ---------------------------------------------------------------------------------------
 @app.route('/insert_airline', methods=['POST'])
 def insert_airline():
+	start_time = time.time()
 	if request.method == 'POST' :
 		data = [ {
 				'nama': 'id_airline',
@@ -465,6 +486,9 @@ def insert_airline():
 		else :
 			msg = "Failed INSERT to airline2"
 
+		duration = time.time() - start_time
+		print "Durasi waktu : ", duration
+
 		result = {
 			"Status" : do_insert,
 			"Message" : msg
@@ -474,6 +498,7 @@ def insert_airline():
 
 @app.route("/delete_airline_by_id", methods=['POST'])
 def delete_airline_by_id():
+	start_time = time.time()
 	do_delete = ''
 	msg = ''
 
@@ -492,6 +517,9 @@ def delete_airline_by_id():
 		except Exception, e:
 				print str(e)
 
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
 	result = {
 		"Status" : do_delete,
 		"Message" : msg
@@ -501,6 +529,7 @@ def delete_airline_by_id():
 
 @app.route('/select_all_airline')
 def select_all_airline():
+	start_time = time.time()
 	print "[log] Select all from table route"
 	# Cek status Sinkronisasi
 	last = getLastSync(data_sync_db)
@@ -534,6 +563,9 @@ def select_all_airline():
 		}
 		airline_list.append(airline)
 
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
 	result = { 
 		"Host" : db_data['host'],
 		"Database" : db_data['name'],
@@ -545,6 +577,7 @@ def select_all_airline():
 
 @app.route('/select_airline/<id_airline>')
 def select_airline(id_airline):
+	start_time = time.time()
 	print "[log] Select airline by airline's ID"
 	# Cek status Sinkronisasi
 	# id_airline = int(id_airline)
@@ -580,6 +613,9 @@ def select_airline(id_airline):
 			'active_stat' : data[7]
 		}
 
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration	
+
 	result = { 
 		"host" : db_data['host'],
 		"database" : db_data['name'],
@@ -591,6 +627,7 @@ def select_airline(id_airline):
 
 @app.route('/update_airline_by_id', methods=['POST'])
 def update_airline():
+	start_time = time.time()
 	print "[log] UPDATE airline data by airline's ID"
 	# Cek status Sinkronisasi
 
@@ -622,6 +659,9 @@ def update_airline():
 		else :
 			msg = "Failed to UPDATE table airline"
 
+		duration = time.time() - start_time
+		print "Durasi waktu : ", duration
+
 		result = {
 			"Status" : do_update,
 			"Message" : msg
@@ -632,6 +672,7 @@ def update_airline():
 # AIRLINE ---------------------------------------------------------------------------------------
 @app.route('/insert_airport', methods=['POST'])
 def insert_airport():
+	start_time = time.time()
 	if request.method == 'POST' :
 		data = [ {
 				'nama': 'airport_id',
@@ -711,15 +752,18 @@ def insert_airport():
 		else :
 			msg = "Failed INSERT to airport2"
 
+		duration = time.time() - start_time
+		print "Durasi waktu : ", duration
+
 		result = {
 			"Status" : do_insert,
 			"Message" : msg
 		}
-
 		return jsonify(result)
 
 @app.route("/delete_airport_by_id", methods=['POST'])
 def delete_airport_by_id():
+	start_time = time.time()
 	do_delete = ''
 	msg = ''
 
@@ -738,6 +782,9 @@ def delete_airport_by_id():
 		except Exception, e:
 				print str(e)
 
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
 	result = {
 		"Status" : do_delete,
 		"Message" : msg
@@ -747,6 +794,7 @@ def delete_airport_by_id():
 
 @app.route('/select_all_airport')
 def select_all_airport():
+	start_time = time.time()
 	print "[log] Select all from table airport"
 	# Cek status Sinkronisasi
 	last = getLastSync(data_sync_db)
@@ -786,6 +834,9 @@ def select_all_airport():
 		}
 		airport_list.append(airport)
 
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
 	result = { 
 		"Host" : db_data['host'],
 		"Database" : db_data['name'],
@@ -797,6 +848,7 @@ def select_all_airport():
 
 @app.route('/select_airport/<airport_id>')
 def select_airport(airport_id):
+	start_time = time.time()
 	print "[log] Select airport by airport's ID"
 
 	last = getLastSync(data_sync_db)
@@ -835,6 +887,9 @@ def select_airport(airport_id):
 			'source' : data[13]
 		}
 
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
 	result = { 
 		"host" : db_data['host'],
 		"database" : db_data['name'],
@@ -846,6 +901,7 @@ def select_airport(airport_id):
 
 @app.route('/update_airport', methods=['POST'])
 def update_airport():
+	start_time = time.time()
 	print "[log] UPDATE airport data by airport's ID"
 	# Cek status Sinkronisasi
 
@@ -890,6 +946,9 @@ def update_airport():
 		else :
 			msg = "Failed to UPDATE table airport"
 
+		duration = time.time() - start_time
+		print "Durasi waktu : ", duration
+		
 		result = {
 			"Status" : do_update,
 			"Message" : msg
