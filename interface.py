@@ -838,7 +838,7 @@ def select_airport(airport_id):
 	result = { 
 		"host" : db_data['host'],
 		"database" : db_data['name'],
-		"airline" : airport
+		"airport" : airport
 	}
 
 	return jsonify(result)

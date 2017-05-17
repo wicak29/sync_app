@@ -2,29 +2,30 @@ get mysql_db_conf_data
 get hbase_db_conf_data
 get sync_log_db_conf_data
 get ssh_access_data
-
 get last_sync_log_data
-set initial_sync_log 
+set initial_sync_log
+set start_time 
 query_count = 0
 do_patching = false
 
 if (last_sync_log_data is empty)
-	dump mysql_table to mysql_table.csv
-	execute create_table.sql with apache phoenix
-	if (create_table is success)
-		execute mysql_table.csv with apache phoenix
+dump mysql_table to mysql_table.csv
+execute create_table.sql with apache phoenix
+if (create_table is success)
+execute mysql_table.csv with apache phoenix
 else
-	ssh to mysql_db_server 
-	get log_query_file
-	for line in log_query_file
-		get query_time
-		if (query_time > last_sync_log_data)
-			get query_syntax
-			query_tmp = convert query_syntax to apache phoenix sintax
-			append query_tmp to list_all_query
-			do_patching = true
-	if (query_count is 0)
-		update sync_log
-	if (do_patching is true)
-		execute list_all_query with apache phoenix
-		update sync_log
+ssh to mysql_db_server 
+get log_query_file
+for line in log_query_file
+get query_time
+if (query_time > last_sync_log_data)
+get query_syntax
+query_tmp = convert query_syntax to apache phoenix syntax
+append query_tmp to list_all_query
+	do_patching = true
+if (query_count is 0)
+update sync_log
+if (do_patching is true)
+execute list_all_query with apache phoenix
+update sync_log
+duration = time_now – start_time
