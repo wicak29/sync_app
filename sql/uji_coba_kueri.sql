@@ -21,3 +21,12 @@ Table Airport : select * from airport2 order by airport_id desc;
 --------------------------------------------------------
 UPDATE airport2 SET timezone='9', dst='A' WHERE airport_id=1;
 INSERT INTO airport2 (airport_Id, name_airport, city, country, iata, icao, latitude, longitude, altitude, timezone, dst, tz_db, type_airport, source) VALUES (12059,'Goroka Airport','Goroka','Papua New Guinea','GKA','AYGA','-6.081689834590001','145.391998291','5282','10','U','Pacific/Port_Moresby','airport','OurAirports');
+
+
+kueri select : 
+--------------------------------------------
+SELECT a.*,b.country  FROM routes2 a JOIN airline2 b on a.id_airline = b.id_airline where a.id_route=410;
+SELECT id_airline, count(id_route) FROM routes2 GROUP BY id_airline;
+SELECT a.id_airline,b.name, count(a.id_route) FROM routes2 a JOIN airline2 b on a.id_airline = b.id_airline GROUP BY a.id_airline;
+SELECT id_airline, count(id_route) FROM routes2 GROUP BY id_airline HAVING COUNT(*) > 100;
+SELECT DISTINCT id_airline from routes2;

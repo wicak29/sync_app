@@ -1,0 +1,44 @@
+CREATE TABLE IF NOT EXISTS routes2 (
+	id_route INTEGER NOT NULL,
+    airline VARCHAR DEFAULT NULL,
+    id_airline INTEGER DEFAULT NULL,
+    src_airport VARCHAR DEFAULT NULL,
+    id_src_airport INTEGER DEFAULT NULL,
+	dst_airport VARCHAR DEFAULT NULL,
+	id_dst_airport INTEGER DEFAULT NULL,
+	codeshare VARCHAR DEFAULT NULL,
+	stop_val INTEGER DEFAULT NULL,
+	equipment VARCHAR DEFAULT NULL,
+	log_date VARCHAR DEFAULT NULL
+	CONSTRAINT pk PRIMARY KEY (id_route)
+);
+
+CREATE TABLE IF NOT EXISTS airport2 (
+    airport_id INTEGER NOT NULL,
+    name_airport VARCHAR DEFAULT NULL,
+    city VARCHAR DEFAULT NULL,
+    country VARCHAR DEFAULT NULL,
+    iata VARCHAR DEFAULT NULL,
+    icao VARCHAR DEFAULT NULL,
+    latitude VARCHAR DEFAULT NULL,
+    longitude VARCHAR DEFAULT NULL,
+    altitude VARCHAR DEFAULT NULL,
+    timezone VARCHAR DEFAULT NULL,
+    dst VARCHAR DEFAULT NULL,
+    tz_db VARCHAR DEFAULT NULL,
+    type_airport VARCHAR DEFAULT NULL,
+    source VARCHAR
+	CONSTRAINT pk PRIMARY KEY (airport_id)
+);
+
+CREATE TABLE IF NOT EXISTS airline2 (
+        id_airline INTEGER NOT NULL,
+        name VARCHAR DEFAULT NULL,
+        alias VARCHAR DEFAULT NULL,
+        iata VARCHAR DEFAULT NULL,
+        icao VARCHAR DEFAULT NULL,
+        callsign VARCHAR DEFAULT NULL,
+        country VARCHAR DEFAULT NULL,
+        active_stat VARCHAR DEFAULT NULL
+        CONSTRAINT pk PRIMARY KEY (id_airline)
+);

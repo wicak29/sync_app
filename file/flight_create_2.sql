@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS routes2 (
 	data.codeshare VARCHAR DEFAULT NULL,
 	data.stop_val INTEGER DEFAULT NULL,
 	log.equipment VARCHAR DEFAULT NULL,
-	log.log_date VARCHAR DEFAULT NULL
+	log.log_date DATE DEFAULT NULL
 	CONSTRAINT pk PRIMARY KEY (id_route)
 );
 
