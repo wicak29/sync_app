@@ -190,7 +190,7 @@ def insert_routes():
 			},
 			{
 				'nama': 'id_airline',
-				'type': 'varchar',
+				'type': 'int',
 				'value': request.form['id_airline']
 			},
 			{
@@ -200,7 +200,7 @@ def insert_routes():
 			},
 			{
 				'nama': 'id_src_airport',
-				'type': 'varchar',
+				'type': 'int',
 				'value': request.form['id_src_airport']
 			},
 			{
@@ -210,7 +210,7 @@ def insert_routes():
 			},
 			{
 				'nama': 'id_dst_airport',
-				'type': 'varchar',
+				'type': 'int',
 				'value': request.form['id_dst_airport']
 			},
 			{
@@ -404,11 +404,11 @@ def update_route_by_id():
 		
 		kueri = ("UPDATE routes2 "
 			"SET airline='{0}', "
-			"id_airline='{1}', "
+			"id_airline={1}, "
 			"src_airport='{2}', "
-			"id_src_airport='{3}', "
+			"id_src_airport={3}, "
 			"dst_airport='{4}', "
-			"id_dst_airport='{5}', "
+			"id_dst_airport={5}, "
 			"codeshare='{6}', "
 			"stop_val={7}, "
 			"equipment='{8}', "

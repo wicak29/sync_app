@@ -176,7 +176,7 @@ def initiateTransformMysqlToHbase(mysql_db, hbase_db, sync_db):
 	if (init) :
 		print "Data berhasil di export!"
 		print "Inisialisasi data awal.."
-		print "Mmentransformasi data ke HBase..."
+		print "Mentransformasi data ke HBase..."
 		create_tabel = "psql.py file/flight_create_2.sql" 
 
 		try :
@@ -311,7 +311,7 @@ if __name__ == '__main__':
 			# Menjalankan DELETE, INSERT, dan UPDATE
 			if (do_patching):
 				print "Sinkronisasi, DELETE, INSERT dan UPDATE file on progress sync to HBase..."
-				phoenix_cmd = "psql.py -t ROUTES2 file/list_all_query.sql"
+				phoenix_cmd = "psql.py file/list_all_query.sql"
 				res_phoenix =''
 
 				try : 
