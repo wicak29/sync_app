@@ -1,27 +1,38 @@
+---------------------------------------------------------------------------------
 Skenario Uji Fungsionalitas : 
-1. Sinkronisasi Data MySQL ke HBase
-	
-2. Kontrol Layanan
+---------------------------------------------------------------------------------
+1. Inisialisasi Basis Data
+2. Transformasi Basis Data
+3. Antar muka basis data (Ini ditambahkan yang variasi select yang baru)
+* Ini yang ambil data harusnya terpisah dari yang CUD!!
 
-3. Akses Data Interface 
-	
-Skenario Uji Coba 1 (Jumlah row): 
+
+
+---------------------------------------------------------------------------------
+Skenario Uji Coba Kapasitas dan Performas :
+---------------------------------------------------------------------------------
+Skenario Uji Coba 1 Transformasi (Jumlah row): 
 Jumlah Tabel 3
 Jumlah Row : 	airline = 6000, 12000, 18000, 24000, 30000
 				airport = 7000, 14000, 21000, 28000, 35000
 				route = 60000, 120000, 180000, 240000, 300000		
 
-Skenario Uji Coba 2 (Jumlah Table)
+Skenario Uji Coba 2 Transformasi (Jumlah Table)
 Jumlah Row : airline 6000, airport 7000, route 60000
 Jumlah Tabel : 3, 6, 9, 12, 15
 
-Skenario Uji Coba 3 (Insert)
+Skenario Uji Coba 3 (Jumlah kueri Insert) 
 Jumlah insert : 
 	1000, 2000, 3000, 4000, 5000
 	
-Skenario Uji Coba 4 (Update)
+Skenario Uji Coba 4 (Jumlah Kueri Update)
 Jumlah Update : 
 	1000, 2000, 3000, 4000, 5000
+
+Skenario Uji Coba 4 (Jumlah Kueri Delete)
+Jumlah Delete : 
+	1000, 2000, 3000, 4000, 5000
+
 
 
 

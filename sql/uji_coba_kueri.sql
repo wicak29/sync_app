@@ -27,6 +27,6 @@ kueri select :
 --------------------------------------------
 SELECT a.*,b.country  FROM routes2 a JOIN airline2 b on a.id_airline = b.id_airline where a.id_route=410;
 SELECT id_airline, count(id_route) FROM routes2 GROUP BY id_airline;
-SELECT a.id_airline,b.name, count(a.id_route) FROM routes2 a JOIN airline2 b on a.id_airline = b.id_airline GROUP BY a.id_airline;
 SELECT id_airline, count(id_route) FROM routes2 GROUP BY id_airline HAVING COUNT(*) > 100;
 SELECT DISTINCT id_airline from routes2;
+
