@@ -290,16 +290,19 @@ if __name__ == '__main__':
 								count_kueri+=1
 								# Cek jika sintaks adalah UPDATE
 								if (split_kueri[0].upper()=="INSERT"):
-									print "[sync] INSERT"
+									print "[sync] INSERT ", split_kueri[2]
 									new_kueri = kueri.replace("INSERT", "UPSERT").replace("insert", "UPSERT") + ";\n";
-								if (split_kueri[0].upper()=="UPDATE"):
-									print "[sync] UPDATE"
+								elif (split_kueri[0].upper()=="UPDATE"):
+									print "[sync] UPDATE ", split_kueri[1]
 									new_kueri = conv_phoenix.update_to_upsert(kueri)
-								if (split_kueri[0].upper()=="DELETE") :
-									print "[sync] DELETE"
+									if (new_kueri==0) :
+										print "[err] Table not int List! "
+								elif (split_kueri[0].upper()=="DELETE") :
+									print "[sync] DELETE ", split_kueri[1]
 									new_kueri = kueri.replace("INSERT", "UPSERT").replace("insert", "UPSERT") + ";\n";
 									
-								f_list_query.write(new_kueri)
+								if (new_kueri!=0):
+									f_list_query.write(new_kueri)
 								do_patching = True
 			if (count_kueri ==0) : 
 				print "Tidak ada data yang transformasikan!"
