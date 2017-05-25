@@ -41,6 +41,8 @@ def update_to_upsert(val) :
 		pos = list_table.index(table_name)
 		pk = list_pk[pos]
 		print "PK: ", pk
+	else
+		return 0
 
 	# get kolom and value betwen SET and WHERE
 	fields = re.findall(r'SET(.*?)WHERE', update_str)
@@ -49,8 +51,8 @@ def update_to_upsert(val) :
 	list_value = " SELECT {0},".format(pk)
 	for i in range(len(kol_val)):
 		tmp = kol_val[i]
-		tmp_rmv_space = tmp.replace(" ","")
-		tmp_split = tmp_rmv_space.split('=')
+		# tmp_rmv_space = tmp.replace(" ","")
+		tmp_split = tmp.split('=')
 		kolom[i] = tmp_split[0]
 		value[i] = tmp_split[1]
 		if (i==(len(kol_val)-1)):

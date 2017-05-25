@@ -956,6 +956,187 @@ def update_airport():
 
 	return jsonify(result)
 
+# KOMPLEKS SELECT -------------------------------------------------------------------------------
+@app.route('/select_routes_country/<id_route>')
+def select_routes_country(id_route):
+	start_time = time.time()
+	print "[log] SELECT Join routes with airline country"
+
+	last = getLastSync(data_sync_db)
+	
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	kueri = "SELECT a.*,b.name,b.country  FROM routes2 a JOIN airline2 b ON a.id_airline = b.id_airline WHERE a.id_route = {0}".format(id_route)
+	data = query_db(kueri,[],True,get_from)
+
+	if (data==None) : 
+		route = "No data selected"
+	else :
+		route = {
+			'id_route' : data[0],
+			'airline' : data[1],
+			'id_airline' : data[2],
+			'src_airport' : data[3],
+			'id_src_airport' : data[4],
+			'dst_airport' : data[5],
+			'id_dst_airport' : data[6],
+			'codeshare' : data[7],
+			'stop_val' : data[8],
+			'equipment' : data[9],
+			'log_date' : data[10],
+			'name' : data[11],
+			'country': data[12]
+		}
+
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
+	result = { 
+		"host" : db_data['host'],
+		"database" : db_data['name'],
+		"route" : route
+	}
+
+	return jsonify(result)
+	# return Response(json.dumps(data, encoding='latin1'), mimetype='application/json')
+
+@app.route('/select_all_number_routes_by_airline')
+def select_all_number_routes_by_airline():
+	start_time = time.time()
+	print "[log] Select all number routes by airline"
+	# Cek status Sinkronisasi
+	last = getLastSync(data_sync_db)
+	
+	# 1 : MySQL
+	# 0 : HBase
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	airline_list = []
+	data = query_db("SELECT a.id_airline,b.name,count(id_route) FROM routes2 a JOIN airline2 b ON a.id_airline = b.id_airline GROUP BY a.id_airline,b.name",[],False,get_from)
+	data_numrows = len(data)
+	for row in data :
+		route = {
+			'id_airline' : row[0],
+			'airline_name' : row[1],
+			'number_routes' : row[2]
+		}
+		airline_list.append(route)
+
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
+	result = { 
+		"Host" : db_data['host'],
+		"Database" : db_data['name'],
+		"Rows" : data_numrows,
+		"Routes" : airline_list
+		}
+
+	return Response(json.dumps(result, encoding='latin1'), mimetype='application/json')
+
+@app.route('/select_all_number_routes_more_than/<number>')
+def select_all_number_routes_more_than(number):
+	start_time = time.time()
+	print "[log] Select all number routes more than x"
+	# Cek status Sinkronisasi
+	last = getLastSync(data_sync_db)
+	
+	# 1 : MySQL
+	# 0 : HBase
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	airline_list = []
+	kueri = "SELECT id_airline, count(id_route) FROM routes2 GROUP BY id_airline HAVING COUNT(*) > {0}".format(number)
+	data = query_db(kueri,[],False,get_from)
+	data_numrows = len(data)
+	for row in data :
+		route = {
+			'id_airline' : row[0],
+			'number_routes' : row[1]
+		}
+		airline_list.append(route)
+
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
+	result = { 
+		"Host" : db_data['host'],
+		"Database" : db_data['name'],
+		"Rows" : data_numrows,
+		"Routes" : airline_list
+		}
+
+	return Response(json.dumps(result, encoding='latin1'), mimetype='application/json')
+
+@app.route('/select_all_airline_in_routes')
+def select_all_airline_in_routes():
+	start_time = time.time()
+	print "[log] Select all airline in routes"
+	# Cek status Sinkronisasi
+	last = getLastSync(data_sync_db)
+	
+	# 1 : MySQL
+	# 0 : HBase
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	airline_list = []
+	kueri = "SELECT DISTINCT id_airline from routes2"
+	data = query_db(kueri,[],False,get_from)
+	data_numrows = len(data)
+	for row in data :
+		route = {
+			'id_airline' : row[0]
+		}
+		airline_list.append(route)
+
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
+	result = { 
+		"Host" : db_data['host'],
+		"Database" : db_data['name'],
+		"Rows" : data_numrows,
+		"Routes" : airline_list
+		}
+
+	return Response(json.dumps(result, encoding='latin1'), mimetype='application/json')
+
 # SINKRONISASI ----------------------------------------------------------------------------------
 @app.route("/sinkron")
 def sinkron():
