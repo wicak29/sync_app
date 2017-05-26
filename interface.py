@@ -993,7 +993,7 @@ def select_routes_country(id_route):
 			'stop_val' : data[8],
 			'equipment' : data[9],
 			'log_date' : data[10],
-			'name' : data[11],
+			'airline_name' : data[11],
 			'country': data[12]
 		}
 
@@ -1132,7 +1132,53 @@ def select_all_airline_in_routes():
 		"Host" : db_data['host'],
 		"Database" : db_data['name'],
 		"Rows" : data_numrows,
-		"Routes" : airline_list
+		"Airlines" : airline_list
+		}
+
+	return Response(json.dumps(result, encoding='latin1'), mimetype='application/json')
+
+@app.route('/select_all_airline_source')
+def select_all_airline_source():
+	start_time = time.time()
+	print "[log] Select all airline's source in routes"
+	# Cek status Sinkronisasi
+	last = getLastSync(data_sync_db)
+	
+	# 1 : MySQL
+	# 0 : HBase
+	if (last[4]==1):
+		print "Proses sinkronisasi sedang TIDAK BERLANGSUNG"
+		print "Mengambil data dari HBase.."
+		get_from = 0
+		db_data = data_hbase
+	else:
+		print "Proses sinkronisasi sedang BERLANGSUNG"
+		print "Mengambil data dari MySQL.."
+		get_from = 1
+		db_data = data_mysql
+
+	list_airline_src = []
+	kueri = "SELECT a.id_route, a.id_airline, b.name, a.src_airport,  c.name_airport as source FROM routes2 a JOIN airline2 b on a.id_airline=b.id_airline JOIN airport2 c on a.id_src_airport=c.airport_id"
+	data = query_db(kueri,[],False,get_from)
+	data_numrows = len(data)
+	for row in data :
+		route = {
+			'id_route' : row[0],
+			'id_airline' : row[1],
+			'airline_name' : row[2],
+			'src_airport' : row[3],
+			'source_name' : row[4]
+		}
+		list_airline_src.append(route)
+
+	duration = time.time() - start_time
+	print "Durasi waktu : ", duration
+
+	result = { 
+		"Host" : db_data['host'],
+		"Database" : db_data['name'],
+		"Rows" : data_numrows,
+		"Airlines" : list_airline_src
 		}
 
 	return Response(json.dumps(result, encoding='latin1'), mimetype='application/json')
