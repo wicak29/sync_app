@@ -327,8 +327,8 @@ def select_all_routes():
 	result = { 
 		"Host" : db_data['host'],
 		"Database" : db_data['name'],
-		"Rows" : data_numrows,
-		"Flight_Routes" : routes_list
+		"Rows" : data_numrows
+		#"Flight_Routes" : routes_list
 		}
 
 	return jsonify(result)
