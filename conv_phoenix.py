@@ -41,7 +41,7 @@ def update_to_upsert(val) :
 		pos = list_table.index(table_name)
 		pk = list_pk[pos]
 		print "PK: ", pk
-	else
+	else:
 		return 0
 
 	# get kolom and value betwen SET and WHERE
