@@ -33,6 +33,13 @@ Skenario Uji Coba 4 (Jumlah Kueri Delete)
 Jumlah Delete : 
 	1000, 2000, 3000, 4000, 5000
 
+-	Perbandingan jumlah baris dalam setiap tabel
+-	Perbandingan jumlah tabel pada basis data
+-	Perbandingan jumlah kueri insert
+-	Perbandingan jumlah kueri update
+-	Perbandingan jumlah kueri delete
+
+
 
 
 
