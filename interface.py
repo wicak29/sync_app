@@ -7,8 +7,10 @@ import json, urllib2
 import c_db
 import time
 from ConfigParser import SafeConfigParser
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 data_mysql = c_db.getConfMysqlDb()
 data_hbase = c_db.getConfHbaseDb()
@@ -600,7 +602,7 @@ def select_airline(id_airline):
 	data = query_db(kueri,[],True,get_from)
 
 	if (data==None) : 
-		airline = "No data selected"
+		airline = ""
 	else :
 		airline = {
 			'id_airline' : data[0],
