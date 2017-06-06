@@ -602,7 +602,7 @@ def select_airline(id_airline):
 	data = query_db(kueri,[],True,get_from)
 
 	if (data==None) : 
-		airline = "No data selected"
+		airline = ""
 	else :
 		airline = {
 			'id_airline' : data[0],
