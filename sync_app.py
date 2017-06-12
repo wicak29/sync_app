@@ -290,15 +290,15 @@ if __name__ == '__main__':
 								count_kueri+=1
 								# Cek jika sintaks adalah UPDATE
 								if (split_kueri[0].upper()=="INSERT"):
-									print "[sync] INSERT ", split_kueri[2]
+									# print "[sync] INSERT ", split_kueri[2]
 									new_kueri = kueri.replace("INSERT", "UPSERT").replace("insert", "UPSERT") + ";\n";
 								elif (split_kueri[0].upper()=="UPDATE"):
-									print "[sync] UPDATE ", split_kueri[1]
+									# print "[sync] UPDATE ", split_kueri[1]
 									new_kueri = conv_phoenix.update_to_upsert(kueri)
 									if (new_kueri==0) :
 										print "[err] Table not int List! "
 								elif (split_kueri[0].upper()=="DELETE") :
-									print "[sync] DELETE ", split_kueri[1]
+									# print "[sync] DELETE ", split_kueri[1]
 									new_kueri = kueri.replace("INSERT", "UPSERT").replace("insert", "UPSERT") + ";\n";
 									
 								if (new_kueri!=0):
@@ -311,6 +311,7 @@ if __name__ == '__main__':
 			f_list_query.close()
 			ftp.close()
 
+			print "jumlah kueri disinkronisasi: ", count_kueri
 			# Menjalankan DELETE, INSERT, dan UPDATE
 			if (do_patching):
 				print "Sinkronisasi, DELETE, INSERT dan UPDATE file on progress sync to HBase..."

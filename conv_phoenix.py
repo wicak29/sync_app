@@ -31,7 +31,7 @@ def update_to_upsert(val) :
 
 	# Get nama table
 	table_name = re.findall(r'UPDATE(.*?)SET', update_str)[0].replace(" ", "")
-	print "nama tabel: ", table_name
+	# print "nama tabel: ", table_name
 
 	# Mencari Primary Key Table
 	get_list_tabel = getPrimaryKey()
@@ -40,7 +40,7 @@ def update_to_upsert(val) :
 	if (table_name in list_table):
 		pos = list_table.index(table_name)
 		pk = list_pk[pos]
-		print "PK: ", pk
+		# print "PK: ", pk
 	else:
 		return 0
 

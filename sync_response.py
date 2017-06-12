@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def do_syncronize():
+	print "Melakukan sinkronisasi"
 	exec_bash = "bash do_sync.sh"
 
 	try : 
